@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="ghci gitignore spacemacs vimrc zprofile zshrc"    # list of files/folders to symlink in homedir
+files="ghci gitignore oh-my-zsh spacemacs vimrc zprofile zshrc"    # list of files/folders to symlink in homedir
 
 ##########
 
