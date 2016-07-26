@@ -1,0 +1,10 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Dan Fithian
+	email = dan@simspace.com
+[merge]
+	tool = opendiff
+[core]
+	excludesfile = ~/.gitignore
+	editor = /usr/bin/vim
