@@ -10,7 +10,7 @@ dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 bindir=~/bin
 dotfiles="ghci gitignore oh-my-zsh spacemacs vimrc zprofile zshrc"
-bashfiles="ghci.sh"
+bashfiles="ghci"
 
 ##########
 
@@ -28,7 +28,7 @@ echo "...done"
 for file in $dotfiles; do
     echo "Moving any existing dotfiles from ~ to $olddir"
     mv ~/.$file $olddir/$file
-    echo "Creating symlink to $file in home directory."
+    echo "Creating symlink to $file in home directory"
     ln -s $dir/$file ~/.$file
 done
 
@@ -40,10 +40,10 @@ mkdir -p $bindir
 echo "...done"
 
 for file in $bashfiles; do
-    echo "Moving any existing bashfiles from ~ to $olddir"
-    mv ~/$file $olddir/$file
-    echo "Copying $file to $bindir"
-    cp $file $bindir/$file
+    echo "Moving any existing bashfiles from $bindir to $olddir"
+    mv $bindir/$file $olddir/$file
+    echo "Creating symlink to $file in $bindir"
+    ln -s $dir/$file.sh $bindir/$file
     echo "Making $file executable in $bindir"
     chmod +x $bindir/$file
 done
