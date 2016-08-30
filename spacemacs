@@ -233,3 +233,5 @@ layers configuration."
 (setenv "DOCKER_HOST" "tcp://192.168.99.100:2376")
 (setenv "DOCKER_CERT_PATH" "/Users/dan/.docker/machine/machines/default")
 (setenv "DOCKER_MACHINE_NAME" "default")
+(setq ido-virtual-buffers '())
+(setq recentf-list '())

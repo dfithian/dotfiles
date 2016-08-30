@@ -106,6 +106,7 @@ docker-purge() {
 }
 
 alias em="emacsclient -n"
+alias ghci="sh ~/dotfiles/ghci.sh"
 export HOMEBREW_EDITOR=emacsclient
 export JAVA_OPTS="-Xms1024M -Xmx2048M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxMetaspaceSize=512M -Dsbt.override.build.repos=true"
 export JAVA_HOME=$(/usr/libexec/java_home)

@@ -1,9 +1,6 @@
 #!/bin/bash
 
-stack ghci \
-  --package classy-prelude \
-  --package lens \
-  --package monad-control \
-  --package time \
-  --ghci-options -XNoImplicitPrelude \
-  --ghci-options -XScopedTypeVariables
+stack ghci --no-load --no-docker \
+      classy-prelude lens monad-control time \
+      --ghci-options -XNoImplicitPrelude \
+      --ghci-options -XScopedTypeVariables
