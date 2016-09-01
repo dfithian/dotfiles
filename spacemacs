@@ -200,7 +200,7 @@ layers configuration."
  '(evil-want-Y-yank-to-eol t)
  '(expand-region-contract-fast-key "V")
  '(expand-region-reset-fast-key "r")
- '(fill-column 160)
+ ;; '(fill-column 160)
  '(global-whitespace-mode t)
  '(haskell-check-command "/bin/true")
  '(haskell-compile-cabal-build-command "cd %s && stack build --ghc-option=-ferror-spans")
