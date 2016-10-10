@@ -29,7 +29,9 @@
      html
      javascript
      markdown
+     puppet-mode
      purescript
+     ruby
      scala
      (shell :variables
             shell-default-height 30
