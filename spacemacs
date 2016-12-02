@@ -12,6 +12,7 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     csv
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -175,6 +176,7 @@ layers configuration."
   (global-auto-complete-mode)
   (global-linum-mode t)
   (linum-relative-global-mode t)
+  (setq-default fill-column 121)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -202,7 +204,6 @@ layers configuration."
  '(evil-want-Y-yank-to-eol t)
  '(expand-region-contract-fast-key "V")
  '(expand-region-reset-fast-key "r")
- ;; '(fill-column 160)
  '(global-whitespace-mode t)
  '(haskell-check-command "/bin/true")
  '(haskell-compile-cabal-build-command "cd %s && stack build --ghc-option=-ferror-spans")
