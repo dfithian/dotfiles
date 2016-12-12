@@ -93,7 +93,7 @@ start-agent() {
     eval `ssh-agent -s` > /dev/null
   fi
     if [ -z $SSH_AGENT_PID ] && [ -z $SSH_TTY ]; then
-    ssh-add ~/.ssh/id_rsa_simspace
+    ssh-add ~/.ssh/id_rsa_tvision
   fi
 }
 
@@ -112,5 +112,5 @@ export NVM_DIR="~/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 start-agent
-docker-machine start default
-eval $(docker-machine env)
+## docker-machine start default
+## eval $(docker-machine env)
