@@ -12,25 +12,25 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     python
+     sql
      csv
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     agda
+     ;; agda
      ansible
      auto-completion
      c-c++
      dash
-     dockerfile
      emacs-lisp
      git
      haskell
      html
      javascript
      markdown
-     puppet-mode
      purescript
      ruby
      scala
@@ -88,8 +88,8 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Input Mono Narrow"
-                               :size 10
+   dotspacemacs-default-font '("Menlo"
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.0)
@@ -210,7 +210,10 @@ layers configuration."
  '(haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s")
  '(helm-turn-on-recentf t)
  '(highlight-indentation-offset 2)
- '(ring-bell-function (quote ignore) t)
+ '(package-selected-packages
+   (quote
+    (yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic sql-indent yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org thrift tagedit swift-mode spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rake rainbow-delimiters pug-mode psci purescript-mode psc-ide popwin persp-mode pcre2el pbcopy paradox spinner osx-trash osx-dictionary orgit org org-plus-contrib org-bullets open-junk-file noflet neotree multi-term move-text mmm-mode minitest markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum livid-mode skewer-mode simple-httpd linum-relative link-hint less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc jinja2-mode intero flycheck info+ indent-guide ido-vertical-mode hydra hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-hoogle helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets haml-mode google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter ghc gh-md flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help ensime sbt-mode scala-mode emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl dash-at-point csv-mode company-web web-completion-data dash-functional company-statistics company-ghci haskell-mode company-c-headers company column-enforce-mode coffee-mode cmm-mode cmake-mode clean-aindent-mode clang-format chruby bundler inf-ruby bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed ansible-doc ansible f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup quelpa package-build spacemacs-theme)))
+ '(ring-bell-function (quote ignore))
  '(scala-indent:align-forms t)
  '(scala-indent:align-parameters t)
  '(scala-indent:default-run-on-strategy scala-indent:operator-strategy)
@@ -232,9 +235,9 @@ layers configuration."
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
 
-(setenv "DOCKER_TLS_VERIFY" "1")
-(setenv "DOCKER_HOST" "tcp://192.168.99.100:2376")
-(setenv "DOCKER_CERT_PATH" "/Users/dan/.docker/machine/machines/default")
-(setenv "DOCKER_MACHINE_NAME" "default")
+;; (setenv "DOCKER_TLS_VERIFY" "1")
+;; (setenv "DOCKER_HOST" "tcp://192.168.99.100:2376")
+;; (setenv "DOCKER_CERT_PATH" "/Users/dan/.docker/machine/machines/default")
+;; (setenv "DOCKER_MACHINE_NAME" "default")
 (setq ido-virtual-buffers '())
 (setq recentf-list '())
