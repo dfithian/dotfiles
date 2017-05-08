@@ -1,7 +1,12 @@
 #!/bin/bash
 
 stack ghci --no-load --no-docker \
-      classy-prelude lens monad-control time \
+      --package classy-prelude \
+      --package aeson \
+      --package lens \
+      --package monad-control \
+      --package time \
+      --ghci-options -XDataKinds \
       --ghci-options -XEmptyDataDecls \
       --ghci-options -XFlexibleContexts \
       --ghci-options -XFlexibleInstances \

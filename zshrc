@@ -94,15 +94,16 @@ start-agent() {
   fi
     if [ -z $SSH_AGENT_PID ] && [ -z $SSH_TTY ]; then
     ssh-add ~/.ssh/id_rsa_tvision
+    ssh-add ~/.ssh/id_rsa_tvitest
   fi
-}
-
-ssh-sim() {
-  ssh -i ~/.ssh/simspace.pem $1
 }
 
 docker-purge() {
   docker rmi $(docker images -aq -f "dangling=true")
+}
+
+pyenv() {
+  . /Users/dan/tvision/env/tvision/bin/activate
 }
 
 alias em="emacsclient -n"
@@ -111,6 +112,13 @@ export HOMEBREW_EDITOR=emacsclient
 export NVM_DIR="~/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.101:2376"
+export DOCKER_CERT_PATH="/Users/dan/.docker/machine/machines/default"
+export DOCKER_MACHINE_NAME="default"
+# Run this command to configure your shell:
+# eval $(docker-machine env default)
+docker-machine start default
+eval $(docker-machine env default)
 start-agent
-## docker-machine start default
-## eval $(docker-machine env)
+pyenv
