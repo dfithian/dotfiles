@@ -95,6 +95,7 @@ start-agent() {
     if [ -z $SSH_AGENT_PID ] && [ -z $SSH_TTY ]; then
     ssh-add ~/.ssh/id_rsa_tvision
     ssh-add ~/.ssh/id_rsa_tvitest
+    ssh-add ~/.ssh/id_rsa_tviprod
   fi
 }
 

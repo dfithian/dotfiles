@@ -1,4 +1,5 @@
-colorscheme badwolf
+set background=dark
+colorscheme solarized
 filetype indent on      " load filetype-specific indent files
 
 " pathogen installation
@@ -67,13 +68,14 @@ endif
 " Packages (for reference when installing)
 "
 " git clone git@github.com:sjl/badwolf.git " symlinked in ~/.vim/colors
+" git clone git@github.com:altercation/vim-colors-solarized.git " symlinked in ~/.vim/colors
 " git clone git@github.com:vim-scripts/haskell.vim.git
 " git clone git@github.com:Shougo/neomru.vim.git
 " git clone git@github.com:Shougo/neoyank.vim.git
 " git clone git@github.com:Shougo/unite.vim.git
 " git clone git@github.com:tsukkee/unite-help.git
 " git clone git@github.com:Shougo/vimproc.vim.git
-" git clone git://github.com/tpope/vim-surround.git
+" git clone git@github.com:tpope/vim-surround.git
 
 
 " Unite
