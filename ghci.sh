@@ -1,7 +1,7 @@
 #!/bin/bash
 
 stack ghci --no-load --no-docker \
-      --resolver lts-9.0 \
+      --resolver lts-9.13 \
       --package classy-prelude \
       --package aeson \
       --package lens \
@@ -9,12 +9,13 @@ stack ghci --no-load --no-docker \
       --package time \
       --package monad-logger \
       --package syb \
+      --package contravariant \
+      --package profunctors \
       --ghci-options -XConstraintKinds \
       --ghci-options -XDataKinds \
       --ghci-options -XDeriveDataTypeable \
       --ghci-options -XDeriveGeneric \
       --ghci-options -XEmptyDataDecls \
-      --ghci-options -XFlexibleContexts \
       --ghci-options -XFlexibleInstances \
       --ghci-options -XGADTs \
       --ghci-options -XGeneralizedNewtypeDeriving \

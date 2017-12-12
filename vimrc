@@ -164,6 +164,7 @@ nnoremap <silent> <Leader>bl :Unite -no-hide-icon buffer neomru/file<cr>
 nnoremap <silent> <Leader>pT :Unite -no-hide-icon -start-insert tag<cr>
 nnoremap <silent> <Leader>pf :Unite -no-hide-icon -start-insert file_rec/async buffer<cr>
 nnoremap <silent> <Leader>ff :Unite -no-hide-icon -start-insert file buffer<cr>
+nnoremap <silent> <leader>fe :Unite -no-hide-icon -start-insert file -path=<C-R>=expand("%:p:h") . '/'<CR>
 nnoremap <silent> <Leader><space>w :Unite -no-hide-icon -start-insert window<cr>
 nnoremap <silent> <Leader>hh :Unite -no-hide-icon -start-insert help<cr>
 nnoremap <silent> <Leader>y :Unite -no-hide-icon -start-insert register history/yank<cr>
@@ -171,3 +172,5 @@ nnoremap <silent> <Leader>y :Unite -no-hide-icon -start-insert register history/
 nnoremap <silent> <Leader>ss :Unite -no-hide-icon -start-insert line<cr>
 nnoremap <silent> <Leader>/ :Unite -no-hide-icon grep:.<cr>
 nnoremap <silent> <Leader>hl :UniteResume<cr>
+" Open file prompt with current path
+nmap <leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
