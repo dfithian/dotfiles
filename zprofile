@@ -5,7 +5,7 @@ export SPARK_HOME=~/tvision/spark
 export PYTHONPATH=$SPARK_HOME/python
 export PATH="/opt/local/bin:/opt/local/sbin:$HOME/bin:$SCALA_HOME/bin:$HOME/.local/bin:$HOME/Library/Haskell/bin:$HOME/.cabal/bin:$SPARK_HOME/bin:$PATH"
 
-# Setting PATH for Python 3.5
+# Setting PATH for Python 3.6
 # The original version is saved in .zprofile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 export PATH

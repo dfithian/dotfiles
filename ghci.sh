@@ -1,7 +1,7 @@
 #!/bin/bash
 
 stack ghci --no-load --no-docker \
-      --resolver lts-9.13 \
+      --resolver lts-10.4 \
       --package classy-prelude \
       --package aeson \
       --package lens \
