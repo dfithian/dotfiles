@@ -11,6 +11,7 @@ stack ghci --no-load --no-docker \
       --package syb \
       --package contravariant \
       --package profunctors \
+      --package yaml \
       --ghci-options -XConstraintKinds \
       --ghci-options -XDataKinds \
       --ghci-options -XDeriveDataTypeable \

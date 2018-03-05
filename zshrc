@@ -104,7 +104,7 @@ docker-purge() {
 }
 
 pyenv() {
-  . /Users/dan/tvision/env/tvision/bin/activate
+  . /Users/dan/tvision/env/bin/activate
 }
 
 alias em="emacsclient -n"
