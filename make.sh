@@ -9,7 +9,7 @@
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 bindir=~/bin
-dotfiles="ghci gitconfig gitignore spacemacs vimrc zprofile zshrc"
+dotfiles="ghci gitconfig gitignore spacemacs vimrc zprofile zshrc xbindkeysrc"
 
 ##########
 
