@@ -1,7 +1,7 @@
 #!/bin/bash
 
 stack ghci --no-load --no-docker \
-      --resolver lts-10.4 \
+      --resolver lts-10.10 \
       --package classy-prelude \
       --package aeson \
       --package lens \
@@ -38,5 +38,4 @@ stack ghci --no-load --no-docker \
       --ghci-options -XTupleSections \
       --ghci-options -XTypeFamilies \
       --ghci-options -XTypeOperators \
-      --ghci-options -XViewPatterns \
-      "${@:1}"
+      --ghci-options -XViewPatterns

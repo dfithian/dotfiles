@@ -1,13 +1,12 @@
 set background=dark
-colorscheme solarized
+" colorscheme solarized
 filetype indent on      " load filetype-specific indent files
 
 " pathogen installation
 " mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 call pathogen#infect()
-call pathogen#runtime_append_all_bundles()
 
-let mapleader=" "                                                   " leader is comma
+let mapleader=" "                                                   " leader is space
 let &guicursor = substitute(&guicursor, 'n-v-c:', '&blinkon0-', '') " no blinking cursor
 
 " move vertically by visual line (including wrapping)
