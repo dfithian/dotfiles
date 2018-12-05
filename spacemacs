@@ -25,11 +25,12 @@
      dash
      emacs-lisp
      git
-     haskell ;stack install stylish-haskell hasktags hlint structured-haskell-mode
+     (haskell :variables
+              haskell-process-type 'stack-ghci
+              haskell-completion-backend 'intero) ;stack install stylish-haskell hasktags hlint structured-haskell-mode
      html
      javascript
      markdown
-     php
      purescript
      python
      ruby
@@ -163,6 +164,9 @@ before layers configuration."
    )
   ;; User initialization goes here
   )
+(defun dotspacemacs/user-init ()
+  (add-hook 'haskell-mode-hook 'intero-mode)
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration function.
