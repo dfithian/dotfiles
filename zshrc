@@ -68,7 +68,6 @@ docker-purge() {
 alias em="emacsclient -n"
 alias ghci="sh ~/dotfiles/ghci.sh"
 alias shake="/Users/dan/tvision/git/mason/scripts/shake.sh"
-shake-init
 
 export PYENV_VERSION=3.5.6
 alias python3=$(pyenv root)/versions/$PYENV_VERSION/bin/python3
