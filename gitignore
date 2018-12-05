@@ -1,8 +1,0 @@
-*.sublime-project
-*.sublime-workspace
-.DS_Store
-*.pyc
-.ld-wrapper-macos
-.stylish-haskell.yaml
-venv
-tmp
