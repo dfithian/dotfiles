@@ -75,6 +75,8 @@ endif
 " git clone git@github.com:tsukkee/unite-help.git
 " git clone git@github.com:Shougo/vimproc.vim.git
 " git clone git@github.com:tpope/vim-surround.git
+" git clone git@github.com:chrisbra/csv.vim.git
+" git clone https://github.com/maksimr/vim-jsbeautify.git
 
 
 " Unite
@@ -147,10 +149,15 @@ autocmd BufNewFile,BufRead *.py set sw=2
 " JSON
 "
 let g:vim_json_syntax_conceal = 0
+map <c-f> :call JsBeautify()<cr>
 
 " Markdown
 "
 autocmd BufNewFile,BufRead *.md set wrap
+
+" CSV
+"
+:filetype plugin on
 
 " Mappings
 "

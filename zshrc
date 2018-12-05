@@ -61,15 +61,20 @@ start-agent() {
   fi
 }
 
-pyenv() {
-  . /home/dfithian/tvision/env/bin/activate
+docker-purge() {
+  docker rmi $(docker images -aq -f "dangling=true")
 }
 
 alias em="emacsclient -n"
 alias ghci="sh ~/dotfiles/ghci.sh"
+alias shake="/Users/dan/tvision/git/mason/scripts/shake.sh"
+shake-init
+
+export PYENV_VERSION=3.5.6
+alias python3=$(pyenv root)/versions/$PYENV_VERSION/bin/python3
+
 export HOMEBREW_EDITOR=emacsclient
 export NVM_DIR="~/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 start-agent
-pyenv

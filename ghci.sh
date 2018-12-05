@@ -1,11 +1,15 @@
 #!/bin/bash
 
 stack ghci --no-load --no-docker \
-      --resolver lts-10.10 \
+      --resolver lts-11.16 \
       --package classy-prelude \
       --package aeson \
+      --package conduit \
+      --package conduit-combinators \
+      --package conduit-extra \
       --package lens \
       --package monad-control \
+      --package postgresql-simple \
       --package time \
       --package monad-logger \
       --package syb \
@@ -30,7 +34,6 @@ stack ghci --no-load --no-docker \
       --ghci-options -XPackageImports \
       --ghci-options -XPolyKinds \
       --ghci-options -XQuasiQuotes \
-      --ghci-options -XRankNTypes \
       --ghci-options -XRecordWildCards \
       --ghci-options -XScopedTypeVariables \
       --ghci-options -XStandaloneDeriving \
