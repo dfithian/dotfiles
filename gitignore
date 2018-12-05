@@ -2,8 +2,6 @@
 *.sublime-workspace
 .DS_Store
 *.pyc
-ingest-manager/config/tracker-models
-ingest-manager/config/driver-models
 .ld-wrapper-macos
 .stylish-haskell.yaml
 venv
