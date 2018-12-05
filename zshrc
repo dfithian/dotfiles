@@ -5,13 +5,13 @@ SAVEHIST=1000
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/dfithian/.zshrc'
+zstyle :compinstall filename '/Users/dan/.zshrc'
 
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-export ZSH=/home/dfithian/.oh-my-zsh
+export ZSH=/Users/dan/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
 plugins=(
