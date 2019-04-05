@@ -1,7 +1,7 @@
 #!/bin/bash
 
 stack ghci --no-load --no-docker \
-      --resolver lts-11.16 \
+      --resolver lts-13.9 \
       --package classy-prelude \
       --package aeson \
       --package conduit \
