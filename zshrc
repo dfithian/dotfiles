@@ -61,18 +61,18 @@ start-agent() {
   fi
 }
 
-docker-purge() {
-  docker rmi $(docker images -aq -f "dangling=true")
-}
-
 # per https://github.com/brianmario/mysql2/issues/795
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl/include"
+export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/curl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/curl/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:/usr/local/opt/curl/lib/pkgconfig"
+export TERM=xterm-color
 
 alias em="emacsclient -n"
 alias ghci="sh ~/dotfiles/ghci.sh"
 alias shake="/Users/dan/tvision/git/mason/scripts/shake.sh"
+
+alias ssh-tunnel="ssh -fN"
 
 export PYENV_VERSION=3.5.6
 alias python3=$(pyenv root)/versions/$PYENV_VERSION/bin/python3
@@ -80,15 +80,5 @@ alias python3=$(pyenv root)/versions/$PYENV_VERSION/bin/python3
 export HOMEBREW_EDITOR=emacsclient
 export NVM_DIR="~/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# install virtualbox and docker
-export DOCKER_TLS_VERIFY="1"
-export DOCKER_HOST="tcp://192.168.99.101:2376"
-export DOCKER_CERT_PATH="/Users/dan/.docker/machine/machines/default"
-export DOCKER_MACHINE_NAME="default"
-# Run this command to configure your shell:
-# eval $(docker-machine env default)
-docker-machine start default
-eval $(docker-machine env default)
 
 start-agent
