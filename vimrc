@@ -1,10 +1,5 @@
 set background=dark
-" colorscheme solarized
 filetype indent on      " load filetype-specific indent files
-
-" pathogen installation
-" mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-call pathogen#infect()
 
 let mapleader=" "                                                   " leader is space
 let &guicursor = substitute(&guicursor, 'n-v-c:', '&blinkon0-', '') " no blinking cursor
@@ -64,21 +59,6 @@ if has("gui_macvim")
   set guifont=Menlo\ Regular:h14
 endif
 
-" Packages (for reference when installing)
-"
-" git clone git@github.com:sjl/badwolf.git " symlinked in ~/.vim/colors
-" git clone git@github.com:altercation/vim-colors-solarized.git " symlinked in ~/.vim/colors
-" git clone git@github.com:vim-scripts/haskell.vim.git
-" git clone git@github.com:Shougo/neomru.vim.git
-" git clone git@github.com:Shougo/neoyank.vim.git
-" git clone git@github.com:Shougo/unite.vim.git
-" git clone git@github.com:tsukkee/unite-help.git
-" git clone git@github.com:Shougo/vimproc.vim.git
-" git clone git@github.com:tpope/vim-surround.git
-" git clone git@github.com:chrisbra/csv.vim.git
-" git clone https://github.com/maksimr/vim-jsbeautify.git
-
-
 " Unite
 "
 let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
@@ -86,74 +66,6 @@ let g:unite_source_history_yank_enable = 1
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts = '--nogroup --nocolor'
 let g:unite_source_grep_recursive_opt = ''
-
-" Haskell
-"
-let g:no_haskell_conceal = 1
-let g:haskell_conceal = 0
-let g:haskell_conceal_wide = 0
-let g:haskell_conceal_enumerations = 0
-let g:haskell_tabular = 1
-set tags=tags;/,codex.tags;/
-let g:tagbar_type_haskell = {
-    \ 'ctagsbin'  : 'hasktags',
-    \ 'ctagsargs' : '-x -c -o-',
-    \ 'kinds'     : [
-        \  'm:modules:0:1',
-        \  'd:data: 0:1',
-        \  'd_gadt: data gadt:0:1',
-        \  't:type names:0:1',
-        \  'nt:new types:0:1',
-        \  'c:classes:0:1',
-        \  'cons:constructors:1:1',
-        \  'c_gadt:constructor gadt:1:1',
-        \  'c_a:constructor accessors:1:1',
-        \  'ft:function types:1:1',
-        \  'fi:function implementations:0:1',
-        \  'o:others:0:1'
-    \ ],
-    \ 'sro'        : '.',
-    \ 'kind2scope' : {
-        \ 'm' : 'module',
-        \ 'c' : 'class',
-        \ 'd' : 'data',
-        \ 't' : 'type'
-    \ },
-    \ 'scope2kind' : {
-        \ 'module' : 'm',
-        \ 'class'  : 'c',
-        \ 'data'   : 'd',
-        \ 'type'   : 't'
-    \ }
-\ }
-
-augroup haskell
-  autocmd!
-  autocmd FileType haskell setlocal indentkeys=
-  autocmd FileType haskell set errorformat=%C\t%.%#,%W\ \ \ \ %f:%l:%c:\ Warning:,%E\ \ \ \ %f:%l:%c:,%Z\ \ \ \ ,\ \ \ \ %f:%l:%c:\ %m
-augroup END
-
-" Scala
-"
-autocmd BufNewFile,BufRead *.scala set sw=2
-autocmd BufNewFile,BufRead *.scala set nocst
-highlight scalaDef cterm=bold
-highlight scalaClass cterm=bold
-highlight scalaObject cterm=bold
-highlight scalaTrait cterm=bold
-
-" Python
-"
-autocmd BufNewFile,BufRead *.py set sw=2
-
-" JSON
-"
-let g:vim_json_syntax_conceal = 0
-map <c-f> :call JsBeautify()<cr>
-
-" Markdown
-"
-autocmd BufNewFile,BufRead *.md set wrap
 
 " CSV
 "
