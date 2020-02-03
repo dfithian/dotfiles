@@ -55,9 +55,7 @@ start-agent() {
     eval `ssh-agent -s` > /dev/null
   fi
     if [ -z $SSH_AGENT_PID ] && [ -z $SSH_TTY ]; then
-    ssh-add ~/.ssh/id_rsa_tvision
-    ssh-add ~/.ssh/id_rsa_tvitest
-    ssh-add ~/.ssh/id_rsa_tviprod
+    ssh-add ~/.ssh/id_rsa
   fi
 }
 
@@ -68,14 +66,9 @@ export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/curl/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:/usr/local/opt/curl/lib/pkgconfig"
 export TERM=xterm-color
 
-alias em="emacsclient -n"
 alias ghci="sh ~/dotfiles/ghci.sh"
-alias shake="/Users/dan/tvision/git/mason/scripts/shake.sh"
 
 alias ssh-tunnel="ssh -fN"
-
-export PYENV_VERSION=3.5.6
-alias python3=$(pyenv root)/versions/$PYENV_VERSION/bin/python3
 
 export HOMEBREW_EDITOR=emacsclient
 export NVM_DIR="~/.nvm"
