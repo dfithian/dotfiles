@@ -4,7 +4,11 @@ stack ghci --no-load --no-docker \
       --resolver lts-14.3 \
       --package classy-prelude \
       --package aeson \
+      --package clock \
+      --package containers \
       --package lens \
+      --package mono-traversable \
+      --package time \
       --ghci-options -XConstraintKinds \
       --ghci-options -XDataKinds \
       --ghci-options -XDeriveDataTypeable \

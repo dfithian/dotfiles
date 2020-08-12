@@ -2,9 +2,14 @@
 [user]
 # Please adapt and uncomment the following lines:
 	name = Dan Fithian
-	email = dan.fithian@tvisioninsights.com
+	email = dan.fithian@simspace.com
 [merge]
 	tool = opendiff
 [core]
 	excludesfile = ~/.gitignore
 	editor = /usr/bin/vim
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

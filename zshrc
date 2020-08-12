@@ -71,7 +71,10 @@ alias ghci="sh ~/dotfiles/ghci.sh"
 alias ssh-tunnel="ssh -fN"
 
 export HOMEBREW_EDITOR=emacsclient
-export NVM_DIR="~/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval $(portal env 2> /dev/null)
 
 start-agent
