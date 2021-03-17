@@ -70,7 +70,7 @@ alias ghci="sh ~/dotfiles/ghci.sh"
 
 alias ssh-tunnel="ssh -fN"
 
-export HOMEBREW_EDITOR=emacsclient
+export HOMEBREW_EDITOR=vi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -78,3 +78,10 @@ export NVM_DIR="$HOME/.nvm"
 eval $(portal env 2> /dev/null)
 
 start-agent
+
+if [ -e /Users/dan/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/dan/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+[ -f "/Users/dan/.ghcup/env" ] && source "/Users/dan/.ghcup/env" # ghcup-env
+
+export XDG_CONFIG_HOME=$HOME/.config
+export GPG_TTY=$(tty)
+source <(/usr/local/bin/kustomize completion zsh)

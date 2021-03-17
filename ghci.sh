@@ -1,7 +1,7 @@
 #!/bin/bash
 
 stack ghci --no-load --no-docker \
-      --resolver lts-14.3 \
+      --resolver lts-15.6 \
       --package classy-prelude \
       --package aeson \
       --package clock \
@@ -9,6 +9,7 @@ stack ghci --no-load --no-docker \
       --package lens \
       --package mono-traversable \
       --package time \
+      --package turtle \
       --ghci-options -XConstraintKinds \
       --ghci-options -XDataKinds \
       --ghci-options -XDeriveDataTypeable \
