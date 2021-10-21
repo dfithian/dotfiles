@@ -1,9 +1,10 @@
 #!/bin/bash
 
 stack ghci --no-load --no-docker \
-      --resolver lts-15.6 \
+      --resolver lts-16.5 \
       --package classy-prelude \
       --package aeson \
+      --package directory \
       --package clock \
       --package containers \
       --package lens \

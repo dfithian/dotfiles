@@ -8,3 +8,5 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = /usr/bin/vim
+[pager]
+	branch = false
