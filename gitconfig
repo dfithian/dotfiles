@@ -1,8 +1,6 @@
-# This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
 	name = Dan Fithian
-	email = dan.fithian@simspace.com
+	email = daniel.m.fithian@gmail.com
 [merge]
 	tool = opendiff
 [core]
@@ -10,3 +8,5 @@
 	editor = /usr/bin/vim
 [pager]
 	branch = false
+[pull]
+	rebase = false

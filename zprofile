@@ -1,12 +1,3 @@
-export SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxMetaspaceSize=512m -Dsbt.override.build.repos=true"
-export JAVA_OPTS="-Xms1024M -Xmx2048M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxMetaspaceSize=512M -Dsbt.override.build.repos=true"
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 export PATH="/opt/local/bin:$PATH"
 export PATH="/opt/local/sbin:$PATH"
-export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/Library/Haskell/bin:$PATH"
-export PATH="$HOME/.cabal/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$HOME/.gem/ruby/2.7.0/bin:$PATH"
-export PATH="/Users/dan/simspace/git/ci/portal:$PATH"
-export PATH="/Users/dan/.cargo/bin:$PATH"
