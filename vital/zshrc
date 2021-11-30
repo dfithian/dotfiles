@@ -1,0 +1,41 @@
+# configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/dan/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+ZSH_THEME="robbyrussell"
+
+plugins=(
+  git
+)
+
+export DISABLE_AUTO_TITLE="true"
+precmd() {
+  print -Pn "\e]0;%n@%m: %~\a"
+}
+
+start-agent() {
+  if [ -z $SSH_AUTH_SOCK ]; then
+    eval `ssh-agent -s` > /dev/null
+  fi
+  if [ -z $SSH_AGENT_PID ] && [ -z $SSH_TTY ]; then
+    ssh-add ~/.ssh/id_rsa
+  fi
+}
+
+alias ghci="sh /home/dan/dotfiles/ghci.sh"
+alias ssh-tunnel="ssh -fN"
+
+export TERM=xterm-color
+export HOMEBREW_EDITOR=vi
+export EDITOR=vi
+
+start-agent

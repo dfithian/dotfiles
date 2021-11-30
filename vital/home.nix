@@ -1,36 +1,32 @@
 { config, pkgs, ... }:
 
-let
-
-  xmonad = pkgs.xmonad-with-packages.override {
-    packages = p: with p; [ xmonad-contrib xmonad-extras ];
-  };
-
-in
-
 {
   imports = [
     /home/dan/vital-nix/user/feh-background.nix
     /home/dan/vital-nix/user/p53.nix
+    /home/dan/vital-nix/user/software-workstation.nix
   ];
 
   home = {
     file = {
-      ".xmonad/xmonad.hs".source = ./xmonad.hs;
       ".zshrc".source = ./zshrc;
+      ".zprofile".source = ./zprofile;
+      ".vimrc".source = ./vimrc;
     };
 
     packages = with pkgs; [
-      zsh-prezto
-      neovim
+      exa
       file
+      firefox
       gimp
+      glxinfo
       google-chrome
-      kitty
-      vscode
+      inkscape
       slack
-      sublime-merge
+      vim
+      vscode
       zoom-us
+      zsh-prezto
     ];
 
     sessionVariables = {
@@ -58,27 +54,11 @@ in
 
     jq.enable = true;
 
-    kitty = {
-      enable = true;
-      settings = {
-        foreground = "#f8f8f2";
-        background = "#272822";
-        selection_foreground = "#f8f8f2";
-        selection_background = "#49483e";
-        font_family = "Fira Code Retina";
-        font_size = "8";
-        visual_bell_duration = "0.05";
-        term = "xterm-256color";
-      };
-    };
-
     man.enable = true;
   };
 
 
   xdg.configFile = {
-    "nvim/init.vim".source = ./nvim/init.vim;
-    "polybar/config".source = ./polybar;
   };
 
   xresources.properties = {
@@ -136,8 +116,6 @@ in
 
   xsession = {
     enable = true;
-
-    windowManager.command = "${xmonad}/bin/xmonad";
+    windowManager.command = "${pkgs.gnome3.gnome-session}/bin/gnome-session";
   };
-
-  nixpkgs.config.allowUnfree = true;
+}
