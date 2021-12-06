@@ -16,6 +16,7 @@ in
     file = {
       ".zshrc".source = ./zshrc;
       ".zprofile".source = ./zprofile;
+      ".gitconfig".source = ./gitconfig;
       ".vimrc".source = ./vimrc;
     };
 
@@ -55,6 +56,18 @@ in
       userEmail = "danielf@vitalbio.com";
       extraConfig = {
         core.editor = "$EDITOR";
+      };
+    };
+
+    firefox = {
+      enable = true;
+      profiles.dan = {
+        settings = {
+          "browser.aboutConfig.showWarning" = false;
+          "browser.search.region" = "US";
+          "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
+          "ui.systemUsesDarkTheme" = 1;
+        };
       };
     };
 
