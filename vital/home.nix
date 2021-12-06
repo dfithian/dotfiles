@@ -55,8 +55,36 @@
     jq.enable = true;
 
     man.enable = true;
-  };
 
+    vscode = {
+      enable = true;
+      package = pkgs.vscode;
+      extensions = with pkgs.vscode-extensions; [
+        bbenoist.Nix
+        justusadam.language-haskell
+        vscodevim.vim
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "vscode-relative-line-numbers";
+          publisher = "extr0py";
+          version = "0.0.5";
+          sha256 = "0s0h56q29d7yysfs5nz0knr18kyqhmymdh4hxgkc8phl4zmyqjfh";
+        }
+        {
+          name = "rewrap";
+          publisher = "stkb";
+          version = "1.15.4";
+          sha256 = "1s55a78b61ly2fgg7mpnq09g0ard4hriqn6pplkwl6p1bc5g5rfa";
+        }
+        {
+          name = "tws";
+          publisher = "jkiviluoto";
+          version = "1.0.1";
+          sha256 = "0aj58iasgnmd2zb7zxz587k9mfmykjwrb8h7hfvpkmh76s9bj4y5";
+        }
+      ];
+    };
+  };
 
   xdg.configFile = {
   };
