@@ -57,6 +57,27 @@ in
       };
     };
 
+    gnome-terminal = {
+      enable = true;
+      themeVariant = "dark";
+      profile = {
+        default = {
+          default = true;
+          visibleName = "default";
+          colors = {
+            foregroundColor = "#f8f8f2"; # "#f9f8f5";
+            backgroundColor = "#75715e"; # "#272822";
+            cursor = {
+              foreground = "#d1d1d1";
+              background = "#272822"; # "#75715e";
+            };
+            palette = [];
+          };
+          audibleBell = false;
+        };
+      };
+    };
+
     firefox = {
       enable = true;
       profiles.dan = {
@@ -178,10 +199,6 @@ in
     "Xft.lcdfilter" = "lcddefault";
 
     "*termname"           = "xterm-256color";
-    "dmenu.selforeground" = "#FFFFFF";
-    "dmenu.background"    = "#000000";
-    "dmenu.selbackground" = "#0C73C2";
-    "dmenu.foreground"    = "#A0A0A0";
   };
 
   xsession = {
