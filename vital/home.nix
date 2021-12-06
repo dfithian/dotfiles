@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 
+let
+  pkgsUnstable = import
+    (builtins.fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz)
+    { config = config.nixpkgs.config; };
+in
 {
   imports = [
     /home/dan/vital-nix/user/feh-background.nix
@@ -15,6 +20,7 @@
     };
 
     packages = with pkgs; [
+      pkgsUnstable._1password-gui
       exa
       file
       firefox
