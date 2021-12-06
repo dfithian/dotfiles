@@ -30,7 +30,7 @@
     ];
 
     sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "vi";
       TERM = "xterm-256color";
     };
 

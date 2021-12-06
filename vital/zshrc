@@ -3,13 +3,10 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
 zstyle :compinstall filename '/home/dan/.zshrc'
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
 
 ZSH_THEME="robbyrussell"
 
@@ -31,11 +28,6 @@ start-agent() {
   fi
 }
 
-alias ghci="sh /home/dan/dotfiles/ghci.sh"
 alias ssh-tunnel="ssh -fN"
-
-export TERM=xterm-color
-export HOMEBREW_EDITOR=vi
-export EDITOR=vi
 
 start-agent
