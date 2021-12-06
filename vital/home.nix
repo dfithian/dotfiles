@@ -14,8 +14,6 @@ in
 
   home = {
     file = {
-      ".zshrc".source = ./zshrc;
-      ".zprofile".source = ./zprofile;
       ".gitconfig".source = ./gitconfig;
       ".vimrc".source = ./vimrc;
     };
@@ -29,11 +27,11 @@ in
       glxinfo
       google-chrome
       inkscape
+      oh-my-zsh
       slack
       vim
       vscode
       zoom-us
-      zsh-prezto
     ];
 
     sessionVariables = {
@@ -102,6 +100,31 @@ in
           sha256 = "0aj58iasgnmd2zb7zxz587k9mfmykjwrb8h7hfvpkmh76s9bj4y5";
         }
       ];
+    };
+
+    zsh = {
+      enable = true;
+      autocd = true;
+      initExtra = ''
+        start-agent() {
+          if [ -z $SSH_AUTH_SOCK ]; then
+            eval `ssh-agent -s` > /dev/null
+          fi
+          if [ -z $SSH_AGENT_PID ] && [ -z $SSH_TTY ]; then
+            ssh-add ~/.ssh/id_rsa
+          fi
+        }
+
+        start-agent
+      '';
+      oh-my-zsh = {
+        enable = true;
+        plugins = [ "git" ];
+        theme = "robbyrussell";
+      };
+      shellAliases = {
+        ssh-tunnel = "ssh -fN";
+      };
     };
   };
 
