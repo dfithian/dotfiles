@@ -44,6 +44,17 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Materia-dark";
+      package = pkgs.materia-theme;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+  };
+
   programs = {
     home-manager.enable = true;
 
@@ -57,34 +68,33 @@ in
       };
     };
 
-    gnome-terminal = {
-      enable = true;
-      themeVariant = "dark";
-      profile = {
-        default = {
-          default = true;
-          visibleName = "default";
-          colors = {
-            foregroundColor = "#f8f8f2"; # "#f9f8f5";
-            backgroundColor = "#75715e"; # "#272822";
-            cursor = {
-              foreground = "#d1d1d1";
-              background = "#272822"; # "#75715e";
-            };
-            palette = [];
-          };
-          audibleBell = false;
-        };
-      };
-    };
-
     firefox = {
       enable = true;
       profiles.dan = {
         settings = {
+          # password settings
+          "accessibility.typeaheadfind.flashBar" = 0;
+          "signon.management.page.breach-alerts.enabled" = false;
+          "signon.autofillForms" = false;
+          "signon.generation.enabled" = false;
+          "signon.rememberSignons" = false;
+
+          # other settings
           "browser.aboutConfig.showWarning" = false;
+          "browser.contentblocking.category" = "standard";
+          "browser.ctrlTab.recentlyUserOrder" = false;
+          "browser.discovery.enabled" = false;
+          "browser.newtabpage.activity-stream.feeds.section.hightlights" = false;
+          "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+          "browser.newtabpage.activity-stream.feeds.snippets" = false;
+          "browser.newtabpage.activity-stream.feeds.topsites" = false;
           "browser.search.region" = "US";
+          "browser.search.suggest.enabled" = false;
+          "browser.tabs.loadInBackground" = false;
+          "browser.urlbar.placeholderName" = "DuckDuckGo";
+          "browser.urlbar.placeholderName.private" = "DuckDuckGo";
           "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
+          "extensions.formautofill.addresses.enabled" = false;
           "ui.systemUsesDarkTheme" = 1;
         };
       };
