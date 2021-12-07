@@ -14,7 +14,6 @@ in
 
   home = {
     file = {
-      ".gitconfig".source = ./gitconfig;
       ".vimrc".source = ./vimrc;
       ".xmodmaprc".source = ./xmodmaprc;
     };
@@ -65,8 +64,13 @@ in
       userName = "Dan Fithian";
       userEmail = "danielf@vitalbio.com";
       extraConfig = {
-        core.editor = "$EDITOR";
+        core = {
+          editor = "$EDITOR";
+        };
+        pager.branch = false;
+        pull.rebase = false;
       };
+      ignores = [ "dist-newstyle" ];
     };
 
     firefox = {
