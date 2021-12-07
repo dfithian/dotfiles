@@ -136,6 +136,10 @@ in
           sha256 = "0aj58iasgnmd2zb7zxz587k9mfmykjwrb8h7hfvpkmh76s9bj4y5";
         }
       ];
+      userSettings = {
+        "files.insertFinalNewline" = true;
+        "files.trimFinalNewlines" = true;
+      };
     };
 
     zsh = {
