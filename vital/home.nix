@@ -16,6 +16,7 @@ in
     file = {
       ".gitconfig".source = ./gitconfig;
       ".vimrc".source = ./vimrc;
+      ".xmodmaprc".source = ./xmodmaprc;
     };
 
     packages = with pkgs; [
@@ -147,6 +148,8 @@ in
         }
 
         start-agent
+
+        ${pkgs.xorg.xmodmap}/bin/xmodmap $HOME/.xmodmaprc
       '';
       oh-my-zsh = {
         enable = true;
