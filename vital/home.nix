@@ -10,12 +10,12 @@ in
     /home/dan/vital-nix/user/feh-background.nix
     /home/dan/vital-nix/user/p53.nix
     /home/dan/vital-nix/user/software-workstation.nix
+    /home/dan/vital-nix/user/xkb-caps-and-ctrl.nix
   ];
 
   home = {
     file = {
       ".vimrc".source = ./vimrc;
-      ".xmodmaprc".source = ./xmodmaprc;
     };
 
     packages = with pkgs; [
@@ -164,8 +164,6 @@ in
         }
 
         start-agent
-
-        ${pkgs.xorg.xmodmap}/bin/xmodmap $HOME/.xmodmaprc
       '';
       oh-my-zsh = {
         enable = true;
