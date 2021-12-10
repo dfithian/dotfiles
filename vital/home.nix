@@ -28,7 +28,9 @@ in
       google-chrome
       inkscape
       oh-my-zsh
+      screen
       slack
+      unzip
       vim
       vscode
       zoom-us
