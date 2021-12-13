@@ -177,6 +177,7 @@ in
   };
 
   xdg.configFile = {
+    "nix/nix.conf".source = ./nix.conf;
   };
 
   xresources.properties = {
