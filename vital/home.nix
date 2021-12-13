@@ -10,7 +10,7 @@ in
     /home/dan/vital-nix/user/feh-background.nix
     /home/dan/vital-nix/user/p53.nix
     /home/dan/vital-nix/user/software-workstation.nix
-    /home/dan/vital-nix/user/xkb-caps-and-ctrl.nix
+    ./dconf.nix # dconf dump / > dconf.settings && nix-shell -p dconf2nix --run 'dconf2nix -i dconf.settings -o dconf.nix'
   ];
 
   home = {
@@ -25,6 +25,8 @@ in
       firefox
       gimp
       glxinfo
+      gnomeExtensions.appindicator
+      gnomeExtensions.system-monitor
       google-chrome
       inkscape
       oh-my-zsh
