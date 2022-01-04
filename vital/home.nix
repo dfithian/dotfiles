@@ -139,12 +139,6 @@ in
           version = "1.0.1";
           sha256 = "0aj58iasgnmd2zb7zxz587k9mfmykjwrb8h7hfvpkmh76s9bj4y5";
         }
-        {
-          name = "elm-ls-vscode";
-          publisher = "elmtooling";
-          version = "2.3.0";
-          sha256 = "1nxl3im5aqiggjx0va64bpjrwshb6fzxan78fqzs68iwn16vsa0b";
-        }
       ];
       userSettings = {
         "files.insertFinalNewline" = true;
