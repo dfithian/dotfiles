@@ -143,6 +143,18 @@ in
       userSettings = {
         "files.insertFinalNewline" = true;
         "files.trimFinalNewlines" = true;
+        "workbench.editor.enablePreview" = false;
+        "files.exclude" = {
+          "**/.git" = true;
+          "**/.svn" = true;
+          "**/.hg" = true;
+          "**/CVS" = true;
+          "**/.DS_Store" = true;
+          "**/Thumbs.db" = true;
+          "**/dist" = true;
+          "**/dist-newstyle" = true;
+          "**/result*" = true;
+        };
       };
     };
 
