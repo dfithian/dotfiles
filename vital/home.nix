@@ -117,7 +117,7 @@ in
       enable = true;
       package = pkgs.vscode;
       extensions = with pkgs.vscode-extensions; [
-        bbenoist.Nix
+        bbenoist.nix
         justusadam.language-haskell
         vscodevim.vim
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
