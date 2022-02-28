@@ -8,7 +8,7 @@ in
 {
   imports = [
     /home/dan/vital-nix/user/feh-background.nix
-    /home/dan/vital-nix/user/p53.nix
+    /home/dan/vital-nix/user/thinkpad.nix
     /home/dan/vital-nix/user/software-workstation.nix
     ./dconf.nix # dconf dump / > dconf.settings && nix-shell -p dconf2nix --run 'dconf2nix -i dconf.settings -o dconf.nix'
   ];
@@ -184,9 +184,7 @@ in
     };
   };
 
-  xdg.configFile = {
-    "nix/nix.conf".source = ./nix.conf;
-  };
+  xdg.configFile = { };
 
   xresources.properties = {
     # special
