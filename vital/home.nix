@@ -20,6 +20,8 @@ in
 
     packages = with pkgs; [
       pkgsUnstable._1password-gui
+      awscli
+      bind
       exa
       file
       firefox
@@ -30,8 +32,10 @@ in
       google-chrome
       inkscape
       oh-my-zsh
+      openssl
       screen
       slack
+      terraform
       unzip
       vim
       vscode
@@ -118,6 +122,7 @@ in
       package = pkgs.vscode;
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
+        hashicorp.terraform
         justusadam.language-haskell
         vscodevim.vim
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
