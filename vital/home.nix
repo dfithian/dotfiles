@@ -39,6 +39,7 @@ in
       unzip
       vim
       vscode
+      websocat
       zoom-us
     ];
 
@@ -50,7 +51,12 @@ in
     stateVersion = "20.03";
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "adobe-reader-9.5.5"
+    ];
+  };
 
   gtk = {
     enable = true;
@@ -125,6 +131,7 @@ in
         hashicorp.terraform
         justusadam.language-haskell
         vscodevim.vim
+        ms-python.python
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "vscode-relative-line-numbers";
