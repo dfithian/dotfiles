@@ -16,11 +16,13 @@ in
   home = {
     file = {
       ".vimrc".source = ./vimrc;
+      ".ghci".source = ./ghci;
     };
 
     packages = with pkgs; [
       pkgsUnstable._1password-gui
       awscli
+      bat
       bind
       exa
       file
@@ -33,6 +35,7 @@ in
       inkscape
       oh-my-zsh
       openssl
+      pkg-config
       screen
       slack
       terraform
