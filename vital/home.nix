@@ -38,6 +38,7 @@ in
       pkg-config
       screen
       slack
+      teams
       terraform
       unzip
       vim
