@@ -1,11 +1,15 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
 { lib, ... }:
 
-let
-  mkTuple = lib.hm.gvariant.mkTuple;
-in
+with lib.hm.gvariant;
+
 {
   dconf.settings = {
+    "org/gnome/Console" = {
+      font-scale = 1.0;
+      theme = "night";
+    };
+
     "org/gnome/Totem" = {
       active-plugins = [ "rotation" "skipto" "save-file" "vimeo" "open-directory" "recent" "media-player-keys" "movie-properties" "screensaver" "screenshot" "autoload-subtitles" "apple-trailers" "variable-rate" ];
       subtitle-encoding = "UTF-8";
@@ -38,6 +42,23 @@ in
       last-panel = "power";
     };
 
+    "org/gnome/desktop/app-folders" = {
+      folder-children = [ "Utilities" "YaST" ];
+    };
+
+    "org/gnome/desktop/app-folders/folders/Utilities" = {
+      apps = [ "gnome-abrt.desktop" "gnome-system-log.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.Dictionary.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.eog.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.fonts.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" "vinagre.desktop" ];
+      categories = [ "X-GNOME-Utilities" ];
+      name = "X-GNOME-Utilities.directory";
+      translate = true;
+    };
+
+    "org/gnome/desktop/app-folders/folders/YaST" = {
+      categories = [ "X-SuSE-YaST" ];
+      name = "suse-yast.directory";
+      translate = true;
+    };
+
     "org/gnome/desktop/calendar" = {
       show-weekdate = false;
     };
@@ -55,7 +76,7 @@ in
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "gnome-power-panel" "slack" "firefox" "zoom" "org-gnome-terminal" "1password" "code" "teams" "google-chrome" "org-gnome-nautilus" ];
+      application-children = [ "gnome-power-panel" "slack" "firefox" "zoom" "org-gnome-terminal" "1password" "code" "teams" "google-chrome" "org-gnome-nautilus" "org-gnome-console" ];
     };
 
     "org/gnome/desktop/notifications/application/1password" = {
@@ -70,12 +91,20 @@ in
       application-id = "firefox.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/gnome-control-center" = {
+      application-id = "gnome-control-center.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/gnome-power-panel" = {
       application-id = "gnome-power-panel.desktop";
     };
 
     "org/gnome/desktop/notifications/application/google-chrome" = {
       application-id = "google-chrome.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-console" = {
+      application-id = "org.gnome.Console.desktop";
     };
 
     "org/gnome/desktop/notifications/application/org-gnome-nautilus" = {
@@ -168,46 +197,6 @@ in
 
     "org/gnome/shell/world-clocks" = {
       locations = "@av []";
-    };
-
-    "org/gnome/terminal/legacy" = {
-      default-show-menubar = true;
-      schema-version = 3;
-      theme-variant = "dark";
-    };
-
-    "org/gnome/terminal/legacy/profiles:" = {
-      default = "default";
-      list = [ "default" ];
-    };
-
-    "org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9" = {
-      audible-bell = false;
-      default-size-columns = 160;
-      default-size-rows = 160;
-    };
-
-    "org/gnome/terminal/legacy/profiles:/:default" = {
-      audible-bell = false;
-      background-color = "#75715e";
-      backspace-binding = "ascii-delete";
-      bold-color-same-as-fg = true;
-      cursor-background-color = "#272822";
-      cursor-blink-mode = "system";
-      cursor-colors-set = true;
-      cursor-foreground-color = "#d1d1d1";
-      cursor-shape = "block";
-      delete-binding = "delete-sequence";
-      foreground-color = "#f8f8f2";
-      highlight-colors-set = false;
-      login-shell = false;
-      palette = [];
-      scrollback-lines = 10000;
-      scrollbar-policy = "always";
-      use-custom-command = false;
-      use-system-font = true;
-      use-theme-colors = false;
-      visible-name = "default";
     };
 
     "org/gnome/tweaks" = {

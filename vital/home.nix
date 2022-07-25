@@ -32,6 +32,7 @@ in
       gnomeExtensions.appindicator
       gnomeExtensions.system-monitor
       google-chrome
+      graphviz
       inkscape
       oh-my-zsh
       openssl
@@ -40,6 +41,7 @@ in
       slack
       teams
       terraform
+      tree
       unzip
       vim
       vscode
@@ -89,6 +91,20 @@ in
         pull.rebase = false;
       };
       ignores = [ "dist-newstyle" ];
+    };
+
+    gnome-terminal = {
+      enable = true;
+      profile = {
+        default = {
+          default = true;
+          allowBold = true;
+          audibleBell = false;
+          scrollbackLines = 100000;
+          transparencyPercent = 0;
+          visibleName = "default";
+        };
+      };
     };
 
     firefox = {

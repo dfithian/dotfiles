@@ -1,3 +1,7 @@
+[org/gnome/Console]
+font-scale=1.0
+theme='night'
+
 [org/gnome/Totem]
 active-plugins=['rotation', 'skipto', 'save-file', 'vimeo', 'open-directory', 'recent', 'media-player-keys', 'movie-properties', 'screensaver', 'screenshot', 'autoload-subtitles', 'apple-trailers', 'variable-rate']
 subtitle-encoding='UTF-8'
@@ -26,6 +30,20 @@ window-size=(1920, 1048)
 [org/gnome/control-center]
 last-panel='power'
 
+[org/gnome/desktop/app-folders]
+folder-children=['Utilities', 'YaST']
+
+[org/gnome/desktop/app-folders/folders/Utilities]
+apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.eog.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
+categories=['X-GNOME-Utilities']
+name='X-GNOME-Utilities.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/YaST]
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+translate=true
+
 [org/gnome/desktop/calendar]
 show-weekdate=false
 
@@ -40,7 +58,7 @@ gtk-im-module='gtk-im-context-simple'
 gtk-theme='Materia-dark'
 
 [org/gnome/desktop/notifications]
-application-children=['gnome-power-panel', 'slack', 'firefox', 'zoom', 'org-gnome-terminal', '1password', 'code', 'teams', 'google-chrome', 'org-gnome-nautilus']
+application-children=['gnome-power-panel', 'slack', 'firefox', 'zoom', 'org-gnome-terminal', '1password', 'code', 'teams', 'google-chrome', 'org-gnome-nautilus', 'org-gnome-console']
 
 [org/gnome/desktop/notifications/application/1password]
 application-id='1password.desktop'
@@ -51,11 +69,17 @@ application-id='code.desktop'
 [org/gnome/desktop/notifications/application/firefox]
 application-id='firefox.desktop'
 
+[org/gnome/desktop/notifications/application/gnome-control-center]
+application-id='gnome-control-center.desktop'
+
 [org/gnome/desktop/notifications/application/gnome-power-panel]
 application-id='gnome-power-panel.desktop'
 
 [org/gnome/desktop/notifications/application/google-chrome]
 application-id='google-chrome.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-console]
+application-id='org.gnome.Console.desktop'
 
 [org/gnome/desktop/notifications/application/org-gnome-nautilus]
 application-id='org.gnome.Nautilus.desktop'
