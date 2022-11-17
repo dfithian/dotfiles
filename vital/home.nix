@@ -10,8 +10,14 @@ in
     /home/dan/vital-nix/user/feh-background.nix
     /home/dan/vital-nix/user/thinkpad.nix
     /home/dan/vital-nix/user/software-workstation.nix
+    /home/dan/vital-nix/user/sw-utils.nix
     ./dconf.nix # dconf dump / > dconf.settings && nix-shell -p dconf2nix --run 'dconf2nix -i dconf.settings -o dconf.nix'
   ];
+
+  device-sw = {
+    src = /home/dan/git/worktree/device-sw;
+    enable-lock = true;
+  };
 
   home = {
     file = {
