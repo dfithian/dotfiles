@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 let
-  pkgsUnstable = import
-    (builtins.fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz)
+  pkgsUnstable_2022_10_17 = import
+    (builtins.fetchTarball https://github.com/NixOS/nixpkgs/archive/104e8082de1b20f9d0e1f05b1028795ed0e0e4bc.tar.gz)
     { config = config.nixpkgs.config; };
 in
 {
@@ -20,7 +20,7 @@ in
     };
 
     packages = with pkgs; [
-      pkgsUnstable._1password-gui
+      pkgsUnstable_2022_10_17._1password-gui
       awscli
       bat
       bind
@@ -33,9 +33,11 @@ in
       gnomeExtensions.system-monitor
       google-chrome
       graphviz
+      qcachegrind
       inkscape
       oh-my-zsh
       openssl
+      postman
       pkg-config
       screen
       slack
@@ -43,10 +45,11 @@ in
       terraform
       tree
       unzip
+      valgrind
       vim
       vscode
       websocat
-      zoom-us
+      pkgsUnstable_2022_10_17.zoom-us
     ];
 
     sessionVariables = {
@@ -171,6 +174,18 @@ in
           version = "1.0.1";
           sha256 = "0aj58iasgnmd2zb7zxz587k9mfmykjwrb8h7hfvpkmh76s9bj4y5";
         }
+        {
+          name = "volar";
+          publisher = "Vue";
+          version = "0.40.1";
+          sha256 = "sha256-WiRM1jbmIgjG0Ff2cmqgCK+StfxGqBM0fnniYTkB4u4=";
+        }
+        {
+          name = "vscode-typescript-next";
+          publisher = "ms-vscode";
+          version = "4.9.20220814";
+          sha256 = "sha256-3uNqBljLPiGe76LJwvy/c53SVw7pgnW55nMcENjpxiI=";
+        }
       ];
       userSettings = {
         "files.insertFinalNewline" = true;
@@ -185,7 +200,7 @@ in
           "**/Thumbs.db" = true;
           "**/dist" = true;
           "**/dist-newstyle" = true;
-          "**/result*" = true;
+          "**/result" = true;
         };
       };
     };
