@@ -19,6 +19,10 @@ in
     enable-lock = true;
   };
 
+  services.lorri = {
+    enable = true;
+  };
+
   home = {
     file = {
       ".vimrc".source = ./vimrc;
@@ -30,6 +34,7 @@ in
       awscli
       bat
       bind
+      direnv
       exa
       file
       firefox
@@ -225,6 +230,8 @@ in
         }
 
         start-agent
+
+        eval "$(direnv hook zsh)"
       '';
       oh-my-zsh = {
         enable = true;
