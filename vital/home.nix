@@ -189,13 +189,19 @@ in
           name = "volar";
           publisher = "Vue";
           version = "0.40.1";
-          sha256 = "sha256-WiRM1jbmIgjG0Ff2cmqgCK+StfxGqBM0fnniYTkB4u4=";
+          sha256 = "sha256-nHfgIuOPAUIFbtQdDrDgkSv4uwIPNnvzxFlcTqkfuKQ=";
         }
         {
           name = "vscode-typescript-next";
           publisher = "ms-vscode";
           version = "4.9.20220814";
           sha256 = "sha256-3uNqBljLPiGe76LJwvy/c53SVw7pgnW55nMcENjpxiI=";
+        }
+        {
+          name = "sass-indented";
+          publisher = "Syler";
+          version = "1.8.22";
+          sha256 = "sha256-i1z9WTwCuKrfU4AhdoSvGEunkk8gdStsod8jHTEnoFY=";
         }
       ];
       userSettings = {
