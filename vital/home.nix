@@ -1,22 +1,11 @@
 { config, pkgs, ... }:
 
-let
-  pkgsUnstable_2022_10_17 = import
-    (builtins.fetchTarball https://github.com/NixOS/nixpkgs/archive/104e8082de1b20f9d0e1f05b1028795ed0e0e4bc.tar.gz)
-    { config = config.nixpkgs.config; };
-in
 {
   imports = [
     /home/dan/vital-nix/user/feh-background.nix
     /home/dan/vital-nix/user/thinkpad.nix
     /home/dan/vital-nix/user/software-workstation.nix
-    /home/dan/vital-nix/user/sw-utils.nix
   ];
-
-  device-sw = {
-    src = /home/dan/git/worktree/device-sw;
-    enable-lock = true;
-  };
 
   services.lorri = {
     enable = true;
@@ -29,11 +18,12 @@ in
     };
 
     packages = with pkgs; [
-      pkgsUnstable_2022_10_17._1password-gui
+      _1password-gui
       awscli
       bat
       bind
       direnv
+      docker
       exa
       file
       firefox
@@ -47,7 +37,6 @@ in
       inkscape
       oh-my-zsh
       openssl
-      postman
       pkg-config
       screen
       slack
@@ -58,7 +47,7 @@ in
       vim
       vscode
       websocat
-      pkgsUnstable_2022_10_17.zoom-us
+      zoom-us
     ];
 
     sessionVariables = {
