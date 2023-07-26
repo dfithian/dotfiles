@@ -175,8 +175,8 @@
         {
           name = "volar";
           publisher = "Vue";
-          version = "0.40.1";
-          sha256 = "sha256-nHfgIuOPAUIFbtQdDrDgkSv4uwIPNnvzxFlcTqkfuKQ=";
+          version = "1.8.6";
+          sha256 = "sha256-EAS/1qYqTksJykS39tdAMIDz/cZaBIs1iH2HhhifVYw=";
         }
         {
           name = "vscode-typescript-next";
@@ -189,6 +189,12 @@
           publisher = "Syler";
           version = "1.8.22";
           sha256 = "sha256-i1z9WTwCuKrfU4AhdoSvGEunkk8gdStsod8jHTEnoFY=";
+        }
+        {
+          name = "haskell";
+          publisher = "haskell";
+          version = "2.2.4";
+          sha256 = "sha256-yJwQBs0Xo1Vn5Y2FEtQgOjKVfkhcJNWafYhMocRyW+M=";
         }
       ];
       userSettings = {
@@ -206,6 +212,7 @@
           "**/dist-newstyle" = true;
           "**/result" = true;
         };
+        "haskell.manageHLS" = "PATH";
       };
     };
 
