@@ -196,6 +196,12 @@
           version = "2.2.4";
           sha256 = "sha256-yJwQBs0Xo1Vn5Y2FEtQgOjKVfkhcJNWafYhMocRyW+M=";
         }
+        {
+          name = "RunOnSave";
+          publisher = "emeraldwalk";
+          version = "0.2.0";
+          sha256 = "sha256-nPm9bTEnNHzb5omGoEh0e8Wp+XTLW2UTtr/OuSBd99g=";
+        }
       ];
       userSettings = {
         "files.insertFinalNewline" = true;
@@ -213,6 +219,12 @@
           "**/result" = true;
         };
         "haskell.manageHLS" = "PATH";
+        "emeraldwalk.runonsave" = {
+          commands = [{
+            match = "\\.hs$";
+            cmd = "fourmolu -i $\{file\}";
+          }];
+        };
       };
     };
 
