@@ -197,10 +197,10 @@
           sha256 = "sha256-yJwQBs0Xo1Vn5Y2FEtQgOjKVfkhcJNWafYhMocRyW+M=";
         }
         {
-          name = "RunOnSave";
-          publisher = "emeraldwalk";
-          version = "0.2.0";
-          sha256 = "sha256-nPm9bTEnNHzb5omGoEh0e8Wp+XTLW2UTtr/OuSBd99g=";
+          name = "terminal-command-keys";
+          publisher = "petekinnecom";
+          version = "0.3.0";
+          sha256 = "sha256-oMbWlSAFdaOJR+zr240ICzis5qL8DnmTOzMxpEjNPW4=";
         }
       ];
       userSettings = {
@@ -219,13 +219,18 @@
           "**/result" = true;
         };
         "haskell.manageHLS" = "PATH";
-        "emeraldwalk.runonsave" = {
-          commands = [{
-            match = "\\.hs$";
-            cmd = "fourmolu -i $\{file\}";
-          }];
-        };
       };
+      keybindings = [
+        {
+          key = "ctrl+space ctrl+f";
+          command = "terminalCommandKeys.run";
+          when = "editorFocus && editorLangId == haskell";
+          args = {
+            cmd = "fourmolu -i \${file}";
+            showTerminal = false;
+          };
+        }
+      ];
     };
 
     zsh = {
