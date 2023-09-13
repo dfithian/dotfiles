@@ -219,6 +219,14 @@
           "**/result" = true;
         };
         "haskell.manageHLS" = "PATH";
+        "vim.insertModeKeyBindings" = [{
+          "before" = ["<C-p>"];
+          "commands" = ["workbench.action.quickOpen"];
+        }];
+        "vim.normalModeKeyBindings" = [{
+          "before" = ["<C-p>"];
+          "commands" = ["workbench.action.quickOpen"];
+        }];
       };
       keybindings = [
         {
