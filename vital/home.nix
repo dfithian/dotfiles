@@ -222,10 +222,16 @@
         "vim.insertModeKeyBindings" = [{
           "before" = ["<C-p>"];
           "commands" = ["workbench.action.quickOpen"];
+        } {
+          "before" = ["<C-w>"];
+          "commands" = ["workbench.action.closeActiveEditor"];
         }];
         "vim.normalModeKeyBindings" = [{
           "before" = ["<C-p>"];
           "commands" = ["workbench.action.quickOpen"];
+        } {
+          "before" = ["<C-w>"];
+          "commands" = ["workbench.action.closeActiveEditor"];
         }];
       };
       keybindings = [
