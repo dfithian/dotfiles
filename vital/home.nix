@@ -144,6 +144,17 @@
 
     man.enable = true;
 
+    ssh = {
+      enable = true;
+      matchBlocks = {
+        "beast.vital.company" = {
+          host = "beast";
+          hostname = "beast.vital.company";
+          forwardAgent = true;
+        };
+      };
+    };
+
     vscode = {
       enable = true;
       package = pkgs.vscode;
@@ -153,6 +164,7 @@
         justusadam.language-haskell
         vscodevim.vim
         ms-python.python
+        ms-vscode-remote.remote-ssh
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "vscode-relative-line-numbers";
