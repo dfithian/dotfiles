@@ -24,7 +24,7 @@
       bind
       direnv
       docker
-      exa
+      eza
       file
       firefox
       gimp
@@ -97,7 +97,7 @@
     gnome-terminal = {
       enable = true;
       profile = {
-        default = {
+        "00000000-0000-0000-0000-000000000000" = {
           default = true;
           allowBold = true;
           audibleBell = false;
@@ -158,6 +158,7 @@
     vscode = {
       enable = true;
       package = pkgs.vscode;
+      # `rm ~/.vscode/extensions/extensions.json` before `home-manager switch`
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
         hashicorp.terraform
@@ -189,6 +190,12 @@
           publisher = "Vue";
           version = "1.8.6";
           sha256 = "sha256-EAS/1qYqTksJykS39tdAMIDz/cZaBIs1iH2HhhifVYw=";
+        }
+        {
+          name = "vscode-typescript-vue-plugin";
+          publisher = "Vue";
+          version = "1.8.25";
+          sha256 = "sha256-A4DEEMpcm2nAxQbeb7s1ar+hAlcexO5rjOg7wIBhNKY=";
         }
         {
           name = "vscode-typescript-next";
