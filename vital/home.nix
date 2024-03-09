@@ -176,8 +176,8 @@
         {
           name = "rewrap";
           publisher = "stkb";
-          version = "1.15.4";
-          sha256 = "1s55a78b61ly2fgg7mpnq09g0ard4hriqn6pplkwl6p1bc5g5rfa";
+          version = "1.16.3";
+          sha256 = "sha256-WHeLTN992ltEZw2W7B3sJrHfAFsOGMq3llV4C0hXLNA=";
         }
         {
           name = "tws";
@@ -221,6 +221,18 @@
           version = "0.3.0";
           sha256 = "sha256-oMbWlSAFdaOJR+zr240ICzis5qL8DnmTOzMxpEjNPW4=";
         }
+        {
+          name = "rust-analyzer";
+          publisher = "rust-lang";
+          version = "0.3.1868";
+          sha256 = "sha256-FJ0/FdbipTSuJhPZL5ER3umiO+GlWJoxEncNXnmp8Po=";
+        }
+        {
+          name = "markdown-all-in-one";
+          publisher = "yzhang";
+          version = "3.6.2";
+          sha256 = "sha256-BIbgUkIuy8clq4G4x1Zd08M8k4u5ZPe80+z6fSAeLdk=";
+        }
       ];
       userSettings = {
         "files.insertFinalNewline" = true;
@@ -238,6 +250,8 @@
           "**/result" = true;
         };
         "haskell.manageHLS" = "PATH";
+        "rewrap.wrappingColumn" = 100;
+        "rust-analyzer.server.path" = "rust-analyzer";
         "vim.insertModeKeyBindings" = [{
           "before" = ["<C-p>"];
           "commands" = ["workbench.action.quickOpen"];
