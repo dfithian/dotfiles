@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
-{
+let darkTheme = false;
+
+in {
   imports = [
     /home/dan/vital-nix/user/feh-background.nix
     /home/dan/vital-nix/user/thinkpad.nix
@@ -41,6 +43,7 @@
       screen
       slack
       terraform
+      thefuck
       tree
       unzip
       valgrind
@@ -63,17 +66,6 @@
     permittedInsecurePackages = [
       "adobe-reader-9.5.5"
     ];
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Materia-dark";
-      package = pkgs.materia-theme;
-    };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
   };
 
   programs = {
@@ -108,37 +100,7 @@
       };
     };
 
-    firefox = {
-      enable = true;
-      profiles.dan = {
-        settings = {
-          # password settings
-          "accessibility.typeaheadfind.flashBar" = 0;
-          "signon.management.page.breach-alerts.enabled" = false;
-          "signon.autofillForms" = false;
-          "signon.generation.enabled" = false;
-          "signon.rememberSignons" = false;
-
-          # other settings
-          "browser.aboutConfig.showWarning" = false;
-          "browser.contentblocking.category" = "standard";
-          "browser.ctrlTab.recentlyUserOrder" = false;
-          "browser.discovery.enabled" = false;
-          "browser.newtabpage.activity-stream.feeds.section.hightlights" = false;
-          "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
-          "browser.newtabpage.activity-stream.feeds.snippets" = false;
-          "browser.newtabpage.activity-stream.feeds.topsites" = false;
-          "browser.search.region" = "US";
-          "browser.search.suggest.enabled" = false;
-          "browser.tabs.loadInBackground" = false;
-          "browser.urlbar.placeholderName" = "DuckDuckGo";
-          "browser.urlbar.placeholderName.private" = "DuckDuckGo";
-          "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
-          "extensions.formautofill.addresses.enabled" = false;
-          "ui.systemUsesDarkTheme" = 1;
-        };
-      };
-    };
+    firefox.enable = true;
 
     jq.enable = true;
 
@@ -238,6 +200,10 @@
         "files.insertFinalNewline" = true;
         "files.trimFinalNewlines" = true;
         "workbench.editor.enablePreview" = false;
+        "workbench.colorTheme" = if darkTheme then "Default Dark Modern" else "Default Light Modern";
+        # "window.autoDetectColorScheme" = true;
+        # "workbench.preferredDarkColorScheme" = "Default Dark Modern";
+        # "workbench.preferredLightColorScheme" = "Default Light Modern";
         "files.exclude" = {
           "**/.git" = true;
           "**/.svn" = true;
@@ -277,6 +243,10 @@
             showTerminal = false;
           };
         }
+        {
+          key = "alt+h";
+          command = "workbench.action.toggleLightDarkThemes";
+        }
       ];
     };
 
@@ -297,9 +267,12 @@
 
         eval "$(direnv hook zsh)"
       '';
+      envExtra = ''
+        export PATH="$PATH:$HOME/.cargo/bin"
+      '';
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" ];
+        plugins = [ "git" "thefuck" ];
         theme = "robbyrussell";
       };
       shellAliases = {
