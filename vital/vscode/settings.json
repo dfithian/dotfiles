@@ -1,0 +1,60 @@
+{
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/CVS": true,
+    "**/Thumbs.db": true,
+    "**/dist": true,
+    "**/dist-newstyle": true,
+    "**/result": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "haskell.manageHLS": "PATH",
+  "rewrap.wrappingColumn": 100,
+  "rust-analyzer.server.path": "/home/dan/.local/bin/rust-analyzer",
+  "update.mode": "none",
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "<C-p>"
+      ],
+      "commands": [
+        "workbench.action.quickOpen"
+      ]
+    },
+    {
+      "before": [
+        "<C-w>"
+      ],
+      "commands": [
+        "workbench.action.closeActiveEditor"
+      ]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": [
+        "<C-p>"
+      ],
+      "commands": [
+        "workbench.action.quickOpen"
+      ]
+    },
+    {
+      "before": [
+        "<C-w>"
+      ],
+      "commands": [
+        "workbench.action.closeActiveEditor"
+      ]
+    }
+  ],
+  "window.autoDetectColorScheme": true,
+  "workbench.editor.enablePreview": false,
+  "workbench.preferredDarkColorScheme": "Default Dark Modern",
+  "workbench.preferredLightColorScheme": "Default Light Modern",
+  "haskell.formattingProvider": "fourmolu"
+}
