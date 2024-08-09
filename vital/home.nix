@@ -1,8 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
-let darkTheme = false;
-
-in {
+{
   imports = [
     /home/dan/vital-nix/user/feh-background.nix
     /home/dan/vital-nix/user/thinkpad.nix
@@ -50,6 +48,7 @@ in {
       vim
       vscode
       websocat
+      yq
       zoom-us
     ];
 
