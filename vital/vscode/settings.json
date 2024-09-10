@@ -5,10 +5,11 @@
     "**/.hg": true,
     "**/.svn": true,
     "**/CVS": true,
-    "**/Thumbs.db": true,
     "**/dist": true,
     "**/dist-newstyle": true,
-    "**/result": true
+    "**/result": true,
+    "**/Thumbs.db": true,
+    "target/": true
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,

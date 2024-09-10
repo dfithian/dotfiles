@@ -35,6 +35,7 @@
       graphviz
       qcachegrind
       inkscape
+      nixfmt
       oh-my-zsh
       openssl
       pkg-config
