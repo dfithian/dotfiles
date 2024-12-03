@@ -41,7 +41,6 @@
       pkg-config
       screen
       slack
-      terraform
       thefuck
       tree
       unzip
