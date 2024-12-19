@@ -14,16 +14,10 @@
     };
 
     packages = with pkgs; [
-      awscli
       bat
-      file
-      graphviz
       jq
-      nixfmt
       openssl
-      pkg-config
       screen
-      tree
       unzip
       vim
       yq
