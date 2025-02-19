@@ -51,6 +51,11 @@
 
     man.enable = true;
 
-    ssh.enable = true;
+    ssh = {
+      enable = true;
+      addKeysToAgent = "yes";
+    };
   };
+
+  services.ssh-agent.enable = true;
 }
