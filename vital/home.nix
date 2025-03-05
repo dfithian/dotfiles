@@ -44,7 +44,9 @@
           editor = "$EDITOR";
         };
         pager.branch = false;
-        pull.rebase = false;
+        pull.rebase = true;
+        credential.helper = "store";
+        credential.useHttpPath = true;
       };
       ignores = [ "dist-newstyle" ];
     };
