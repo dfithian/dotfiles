@@ -1,0 +1,13 @@
+[user]
+	name = Dan Fithian
+	email = dan.fithian@patterndata.ai
+[core]
+	excludesfile = ~/.gitignore
+	editor = /usr/bin/vim
+[pager]
+	branch = false
+[pull]
+	rebase = true
+[credential]
+	helper = store
+	useHttpPath = true
