@@ -6,3 +6,6 @@ for file in gitconfig vimrc zshrc; do
     rm -f ~/.$file
     ln -s "$(pwd)/$file" ~/.$file
 done
+
+rm -f ~/.claude/settings.json
+ln -s "$(pwd)/claude/settings.json" ~/.claude/settings.json

@@ -1,0 +1,57 @@
+{
+  "model": "claude-fable-5[1m]",
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "medium",
+  "awaySummaryEnabled": false,
+  "tui": "fullscreen",
+  "preferredNotifChannel": "notifications_disabled",
+  "permissions": [
+    "defaultMode": "",
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(perl:*)",
+      "Bash(wc:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(cut:*)",
+      "Bash(tr:*)",
+      "Bash(echo:*)",
+      "Bash(pwd)",
+      "Bash(env)",
+      "Bash(which:*)",
+      "Bash(jq:*)",
+      "Bash(diff:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git stash:*)",
+      "Bash(git add:*)",
+      "Bash(git restore:*)",
+      "Bash(sbt:*)",
+      "Bash(scala-cli:*)",
+      "Bash(node:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(./shell_scripts/*)"
+      "Read(~/.claude/**)",
+      "Read(.git/**)"
+    ],
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(sudo:*)",
+      "Read(~/.aws/**)",
+      "Read(~/.claude.json)",
+      "Read(~/.pgpass)"
+    ]
+  ]
+}
