@@ -1,6 +1,6 @@
 [user]
 	name = Dan Fithian
-	email = dan.fithian@patterndata.ai
+	email = daniel.m.fithian@gmail.com
 [core]
 	excludesfile = ~/.gitignore
 	editor = /usr/bin/vim
@@ -11,3 +11,8 @@
 [credential]
 	helper = store
 	useHttpPath = true
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

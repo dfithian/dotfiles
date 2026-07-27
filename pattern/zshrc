@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
-plugins=(git)
+plugins=(git direnv)
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export EDITOR=vim
@@ -16,11 +16,121 @@ start-agent() {
 }
 start-agent
 
+# scripts
+export PATH="/Users/dan/.local/bin:$PATH"
+
+# haskell
+export PATH="/Users/dan/.ghcup/bin:$PATH"
+
+# postgres
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
 # docker desktop
 fpath=(/Users/dan/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 
+alias repo="git rev-parse --show-toplevel"
+
+# bun completions
+[ -s "/Users/dan/.bun/_bun" ] && source "/Users/dan/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# coursier/cs
+export PATH="$PATH:/Users/dan/Library/Application Support/Coursier/bin"
+
 # sdkman (must be at end)
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# BEGIN_AWS_SSO_CLI
+
+# AWS SSO requires `bashcompinit` which needs to be enabled once and
+# only once in your shell.  Hence we do not include the two lines:
+#
+# autoload -Uz +X compinit && compinit
+# autoload -Uz +X bashcompinit && bashcompinit
+#
+# If you do not already have these lines, you must COPY the lines 
+# above, place it OUTSIDE of the BEGIN/END_AWS_SSO_CLI markers
+# and of course uncomment it
+
+__aws_sso_profile_complete() {
+     local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+    _multi_parts : "($(/opt/homebrew/bin/aws-sso ${=_args} list --csv Profile))"
+}
+
+aws-sso-profile() {
+    local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+    local _sso=""
+    local _profile=""
+    
+    if [ -n "$AWS_PROFILE" ]; then
+        echo "Unable to assume a role while AWS_PROFILE is set"
+        return 1
+    fi
+
+    # Parse arguments
+    while [ $# -gt 0 ]; do
+        case "$1" in
+            -S|--sso)
+                shift
+                if [ -z "$1" ]; then
+                    echo "Error: -S/--sso requires an argument"
+                    return 1
+                fi
+                _sso="$1"
+                shift
+                ;;
+            -*)
+                echo "Unknown option: $1"
+                echo "Usage: aws-sso-profile [-S|--sso <sso-instance>] <profile>"
+                return 1
+                ;;
+            *)
+                if [ -z "$_profile" ]; then
+                    _profile="$1"
+                else
+                    echo "Error: Multiple profiles specified"
+                    return 1
+                fi
+                shift
+                ;;
+        esac
+    done
+
+    if [ -z "$_profile" ]; then
+        echo "Usage: aws-sso-profile [-S|--sso <sso-instance>] <profile>"
+        return 1
+    fi
+
+    # Build and execute the eval command with optional SSO flag
+    if [ -n "$_sso" ]; then
+        eval $(/opt/homebrew/bin/aws-sso ${=_args} -S "$_sso" eval -p "$_profile")
+    else
+        eval $(/opt/homebrew/bin/aws-sso ${=_args} eval -p "$_profile")
+    fi
+    
+    if [ "$AWS_SSO_PROFILE" != "$_profile" ]; then
+        return 1
+    fi
+}
+
+aws-sso-clear() {
+    local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+    if [ -z "$AWS_SSO_PROFILE" ]; then
+        echo "AWS_SSO_PROFILE is not set"
+        return 1
+    fi
+    eval $(/opt/homebrew/bin/aws-sso ${=_args} eval -c)
+}
+
+compdef __aws_sso_profile_complete aws-sso-profile
+complete -C /opt/homebrew/bin/aws-sso aws-sso
+
+# END_AWS_SSO_CLI
+
+export AWS_REGION=us-east-1
