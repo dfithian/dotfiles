@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")"
 
-for file in gitconfig vimrc zshrc; do
+for file in gitconfig vimrc zshrc psqlrc; do
     rm -f ~/.$file
     ln -s "$(pwd)/$file" ~/.$file
 done

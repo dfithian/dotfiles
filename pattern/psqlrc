@@ -1,0 +1,15 @@
+\set HISTFILE ~/.psql_history- :DBNAME
+
+\x auto
+\timing
+\pset null 'Ø'
+\pset border 2
+\pset linestyle unicode
+
+\set ds 'set search_path to dump_spec;'
+\set textract_inflight 'select count(1) from textract_job where status is null and started_at > now() - interval ''7 days'';' 
+\set queue_details 'select client_id, queue_identifier, job_type, count(1) from queue_job where issued_at > now() - interval ''1 days'' and status = ''pending'' group by queue_identifier, job_type, client_id order by 4 desc;'
+\set doc_waiting_room 'select array_agg(distinct d.client_id) client_ids, count(*) as doc_count, round(avg(extract(epoch from (now() - d.created_at)) / 60)::numeric, 2) as waiting_mins_avg, round((percentile_cont(0.90) within group (order by extract(epoch from (now() - d.created_at)) / 60))::numeric, 2) as waiting_mins_p90 from document d join document_status ds on ds.document_id = d.id where d.created_at > now() - interval ''2 days'' and ds.indexed_at is null and ds.extraction_failed_at is null order by doc_count desc;'
+\set doc_waiting_room_client 'select d.client_id, count(*) as doc_count, round(avg(extract(epoch from (now() - d.created_at)) / 60)::numeric, 2) as waiting_mins_avg, round((percentile_cont(0.90) within group (order by extract(epoch from (now() - d.created_at)) / 60))::numeric, 2) as waiting_mins_p90 from document d join document_status ds on ds.document_id = d.id where d.created_at > now() - interval ''2 days'' and ds.indexed_at is null and ds.extraction_failed_at is null group by d.client_id order by doc_count desc;'
+\set flyway_latest_migration 'select version, description from flyway_schema_history order by version::real desc limit 1;'
+

@@ -1,12 +1,5 @@
 {
-  "model": "claude-fable-5[1m]",
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "medium",
-  "awaySummaryEnabled": false,
-  "tui": "fullscreen",
-  "preferredNotifChannel": "notifications_disabled",
-  "permissions": [
-    "defaultMode": "",
+  "permissions": {
     "allow": [
       "Bash(ls:*)",
       "Bash(cat:*)",
@@ -42,7 +35,7 @@
       "Bash(node:*)",
       "Bash(npm:*)",
       "Bash(npx:*)",
-      "Bash(./shell_scripts/*)"
+      "Bash(./shell_scripts/*)",
       "Read(~/.claude/**)",
       "Read(.git/**)"
     ],
@@ -53,5 +46,11 @@
       "Read(~/.claude.json)",
       "Read(~/.pgpass)"
     ]
-  ]
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "medium",
+  "awaySummaryEnabled": false,
+  "tui": "fullscreen",
+  "preferredNotifChannel": "notifications_disabled",
+  "model": "claude-fable-5[1m]"
 }
