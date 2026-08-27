@@ -9,3 +9,6 @@ done
 
 rm -f ~/.claude/settings.json
 ln -s "$(pwd)/claude/settings.json" ~/.claude/settings.json
+
+rm -rf ~/.local/bin/ppsql
+ln -s "$(pwd)/ppsql" ~/.local/bin/ppsql
