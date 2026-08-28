@@ -1,0 +1,15 @@
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+# Added by Toolbox App
+export PATH="$PATH:/Users/dan/Library/Application Support/JetBrains/Toolbox/scripts"
+
+
+# >>> coursier install directory >>>
+export PATH="$PATH:/Users/dan/Library/Application Support/Coursier/bin"
+# <<< coursier install directory <<<
+
+# >>> JVM installed by coursier >>>
+export JAVA_HOME="/Users/dan/Library/Caches/Coursier/arc/https/github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_macos-aarch64_bin.tar.gz/graalvm-community-openjdk-21.0.2+13.1/Contents/Home"
+# <<< JVM installed by coursier <<<

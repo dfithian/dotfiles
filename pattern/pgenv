@@ -1,0 +1,248 @@
+# Source this script to provision PG* environment variables for a remote
+# postgres DB. Targets are defined by LocalForward lines in the ssh config
+# where each line carries a trailing comment. You might like to add the
+# following alias to your system:
+#
+# alias pgenv="source /path/to/backend/shell_scripts/pgenv"
+#
+# Be sure you have the "Eng SSH Config" file from 1Password installed on your
+# system. You'll also need to download the "Dev Bastion SSH Key" and "Prod VPC
+# Private Key" .pem files. Save these files using the paths provided in the SSH
+# config.
+#
+# The script works by parsing each Host block's LocalForward entries out of SSH
+# config, e.g.:
+#
+#   LocalForward 5433 pattern-core-develop.cekfqngoarnt.us-east-1.rds.amazonaws.com:5432 # hint=main user=bbadminmaint db=pattern pw=RDS pattern develop
+#
+# hint/user/db are required and pw is optional. If pw isn't specified, it falls
+# back to <block>/hint. The enclosing Host block name is the environment.
+#
+# There are two ways to reach a target:
+#
+#   pgenv         goes through the SSH tunnel, so localhost plus the local
+#                 forwarded port, limited to the ports currently listening.
+#   pgenv --vpn   goes straight to the forward's remote host and port, so it
+#                 needs the VPN rather than the tunnel. Connections are made
+#                 with sslmode=verify-full against the Amazon CA bundle that
+#                 matches the host, downloaded on first use and cached in
+#                 PGENV_CERT_DIR (default ~/.ssh).
+#
+# PGENV_SSH_CONFIG overrides the ssh config path.
+#
+# It is also recommended to define defaults for the PG* variables in your
+# .zshrc so that you can use psql with no args whenever:
+#
+#   export PGHOST='localhost'
+#   export PGPORT='5432'
+#   export PGUSER='postgres'
+#   export PGDATABASE='pattern'
+#   export PGPASSWORD='password'
+
+_pgenv_config="${PGENV_SSH_CONFIG:-$HOME/.ssh/config}"
+_pgenv_cert_dir="${PGENV_CERT_DIR:-$HOME/.ssh}"
+
+_pgenv_err() { printf '\033[1;31m%s\033[0m\n' "ERROR: $1" >&2; }
+_pgenv_warn() { printf '\033[1;33m%s\033[0m\n' "WARN: $1" >&2; }
+
+# This isn't perfect, as it updates the window. The window could have multiple
+# panes, and the last pane to source this script wins in regards to what the
+# window title displays. For most cases though, having the window indicator is
+# better than not having it. I try to always make a new single-pane window
+# anytime I'm accessing dev or prod databases.
+_pgenv_label_tmux() {
+  [[ -n "$TMUX" ]] || return 0
+  (( $+commands[tmux] )) || return 0
+  tmux set-window-option @custom_label "$1"
+}
+
+_pgenv_prompt_password() {
+  printf 'Password from "%s": ' "$1" >&2
+  read -rs PGPASSWORD
+  echo >&2
+  export PGPASSWORD
+}
+
+_pgenv_parse() {
+  emulate -L zsh
+  local line host code rhost meta tok key
+  local -a words
+  local -A m
+  while IFS= read -r line; do
+    words=(${(z)${line%%\#*}})
+    (( ${#words} )) || continue
+    case "${(L)words[1]}" in
+      host)
+        host="${words[2]}"
+        ;;
+      localforward)
+        [[ -n "$host" && "$line" == *'#'* ]] || continue
+        code="${words[3]}"
+        [[ "$code" == *:* ]] || code="$code:${words[4]}"
+        rhost="${${code%:*}#\[}"
+        meta="${line#*\#}"
+        m=()
+        key=""
+        for tok in ${(z)meta}; do
+          if [[ "$tok" == (hint|user|db|pw)=* ]]; then
+            key="${tok%%=*}"
+            m[$key]="${(Q)${tok#*=}}"
+          elif [[ -n "$key" ]]; then
+            m[$key]+=" ${(Q)tok}"
+          fi
+        done
+        [[ -n "${m[hint]}" ]] || continue
+        if [[ -z "${m[user]}" || -z "${m[db]}" ]]; then
+          _pgenv_warn "$host forward on port ${words[2]} has hint=${m[hint]} but no user= or db=; skipping it."
+          continue
+        fi
+        _pgenv_envs+=("$host")
+        _pgenv_hints+=("${m[hint]}")
+        _pgenv_ports+=("${words[2]##*:}")
+        _pgenv_hosts+=("${rhost%\]}")
+        _pgenv_rports+=("${code##*:}")
+        _pgenv_users+=("${m[user]}")
+        _pgenv_dbs+=("${m[db]}")
+        _pgenv_pws+=("${m[pw]:-$host/${m[hint]}}")
+        ;;
+    esac
+  done < "$_pgenv_config"
+}
+
+_pgenv_listening() {
+  lsof -nP -iTCP:"${(j:,:)@}" -sTCP:LISTEN 2>/dev/null |
+    awk 'NR > 1 { for (i = NF; i > 0; i--) if ($i ~ /:[0-9]+$/) { n = $i; sub(/.*:/, "", n); print n; break } }' |
+    sort -u
+}
+
+_pgenv_ca_bundle() {
+  emulate -L zsh
+  local url file dest
+  case "$1" in
+    *.rds.amazonaws.com)
+      url='https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem'
+      file='rds-global-bundle.pem'
+      ;;
+    *.redshift.amazonaws.com)
+      url='https://s3.amazonaws.com/redshift-downloads/amazon-trust-ca-bundle.crt'
+      file='redshift-ca-bundle.crt'
+      ;;
+    *)
+      _pgenv_err "No CA bundle is known for $1. Add its suffix to _pgenv_ca_bundle."
+      return 1
+      ;;
+  esac
+  dest="$_pgenv_cert_dir/$file"
+  if [[ ! -s "$dest" ]]; then
+    printf 'Fetching CA bundle into %s\n' "$dest" >&2
+    if ! curl -fsS -o "$dest" "$url"; then
+      rm -f "$dest"
+      _pgenv_err "Could not download the CA bundle from $url."
+      return 1
+    fi
+  fi
+  print -r -- "$dest"
+}
+
+_pgenv_main() {
+  emulate -L zsh
+  local -a _pgenv_envs _pgenv_hints _pgenv_ports _pgenv_hosts _pgenv_rports _pgenv_users _pgenv_dbs _pgenv_pws
+  local mode='tunnel'
+
+  while (( $# )); do
+    case "$1" in
+      --vpn)
+        mode='vpn'
+        ;;
+      *)
+        _pgenv_err "Unknown option: $1"
+        print -r -- 'usage: pgenv [--vpn]' >&2
+        return 1
+        ;;
+    esac
+    shift
+  done
+
+  if [[ ! -r "$_pgenv_config" ]]; then
+    _pgenv_err "Cannot read ssh config at $_pgenv_config."
+    return 1
+  fi
+
+  _pgenv_parse
+  if (( ! ${#_pgenv_ports} )); then
+    _pgenv_err "No hinted LocalForward entries found in $_pgenv_config."
+    return 1
+  fi
+
+  local -a rows ports
+  local i port
+  if [[ "$mode" == 'vpn' ]]; then
+    rows=({1..${#_pgenv_ports}})
+    ports=(${_pgenv_rports})
+  else
+    local -A live
+    for port in ${(f)"$(_pgenv_listening ${_pgenv_ports})"}; do
+      live[$port]=1
+    done
+    for i in {1..${#_pgenv_ports}}; do
+      [[ -n "${live[${_pgenv_ports[i]}]}" ]] && rows+=($i)
+    done
+    ports=(${_pgenv_ports})
+    if (( ! ${#rows} )); then
+      _pgenv_warn "No tunneled Postgres ports are listening. Is your SSH tunnel up? Use --vpn to connect directly."
+      for i in {1..${#_pgenv_ports}}; do
+        printf '  %s/%s (port %s)\n' "${_pgenv_envs[i]}" "${_pgenv_hints[i]}" "${_pgenv_ports[i]}" >&2
+      done
+      return 1
+    fi
+  fi
+
+  local -a widths cols
+  local col
+  widths=(0 0 0 0)
+  for i in $rows; do
+    cols=("${_pgenv_envs[i]}" "${_pgenv_hints[i]}" "${ports[i]}" "${_pgenv_hosts[i]%%.*}")
+    for col in {1..4}; do
+      (( ${#cols[col]} > widths[col] )) && widths[col]=${#cols[col]}
+    done
+  done
+  local format="%s\t%-${widths[1]}s  %-${widths[2]}s  %-${widths[3]}s  %-${widths[4]}s  %s/%s\n"
+
+  local fzf_prompt='Postgres target: '
+  [[ "$mode" == 'vpn' ]] && fzf_prompt='Postgres target (VPN): '
+
+  local choice
+  choice="$(
+    for i in $rows; do
+      printf "$format" "$i" "${_pgenv_envs[i]}" "${_pgenv_hints[i]}" "${ports[i]}" \
+        "${_pgenv_hosts[i]%%.*}" "${_pgenv_users[i]}" "${_pgenv_dbs[i]}"
+    done | fzf --height=~12 --no-multi --delimiter=$'\t' --with-nth=2.. --prompt="$fzf_prompt"
+  )"
+  [[ -n "$choice" ]] || return 0
+  i="${choice%%$'\t'*}"
+
+  local label="${(U)_pgenv_envs[i]} - ${(C)${_pgenv_hints[i]//-/ }}"
+  if [[ "$mode" == 'vpn' ]]; then
+    local bundle
+    bundle="$(_pgenv_ca_bundle "${_pgenv_hosts[i]}")" || return 1
+    export PGHOST="${_pgenv_hosts[i]}"
+    export PGPORT="${_pgenv_rports[i]}"
+    export PGSSLMODE='verify-full'
+    export PGSSLROOTCERT="$bundle"
+    label+=" (VPN)"
+  else
+    export PGHOST='localhost'
+    export PGPORT="${_pgenv_ports[i]}"
+    unset PGSSLMODE PGSSLROOTCERT
+  fi
+  export PGUSER="${_pgenv_users[i]}"
+  export PGDATABASE="${_pgenv_dbs[i]}"
+  _pgenv_label_tmux "$label"
+  _pgenv_prompt_password "${_pgenv_pws[i]}"
+}
+
+_pgenv_main "$@"
+unfunction _pgenv_main _pgenv_parse _pgenv_listening _pgenv_ca_bundle _pgenv_label_tmux _pgenv_prompt_password _pgenv_err _pgenv_warn
+unset -m '_pgenv_*'
+
+# vim: ft=zsh

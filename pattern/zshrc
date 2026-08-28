@@ -134,3 +134,10 @@ complete -C /opt/homebrew/bin/aws-sso aws-sso
 # END_AWS_SSO_CLI
 
 export AWS_REGION=us-east-1
+
+export PGHOST=localhost
+export PGPORT=5432
+export PGUSER='postgres'
+export PGPASSWORD='password'
+export PGDATABASE='pattern'
+alias pgenv="source $HOME/dotfiles/pattern/pgenv"
