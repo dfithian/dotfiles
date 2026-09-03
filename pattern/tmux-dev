@@ -1,0 +1,11 @@
+#!/bin/bash
+
+dir=${1:-/Users/dan/git/backend}
+cd $dir
+tmux new-session -d
+tmux send-keys 'paws; source ~/.patternrc; sbt' C-m
+tmux split-window -h
+tmux send-keys 'paws' C-m
+tmux split-window -v
+tmux send-keys 'paws; psql' C-m
+tmux attach-session -d

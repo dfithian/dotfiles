@@ -133,6 +133,11 @@ complete -C /opt/homebrew/bin/aws-sso aws-sso
 
 # END_AWS_SSO_CLI
 
+paws() {
+    aws-sso login
+    aws-sso-profile 674698435861:PowerUserAccess
+}
+
 export AWS_REGION=us-east-1
 
 export PGHOST=localhost
