@@ -1,7 +1,38 @@
 #!/bin/bash
 
-dir=${1:-/Users/dan/git/backend}
-cd $dir
+usage() {
+    echo -e "Usage: $0 [-w|--worktree worktree]"
+}
+
+git_dir=/Users/dan/git
+dir=backend
+worktree=
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -w|--worktree)
+            worktree=true
+            dir=$2
+            shift 2
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+if [[ -n "$worktree" ]]; then
+  if [[ ! -d "$git_dir/worktree/$dir" ]]; then
+    cd "$git_dir/backend"
+    git worktree add -b "df/$dir" "../worktree/$dir" develop
+  fi
+fi
+
+cd "$git_dir/worktree/$dir"
 tmux new-session -d
 tmux send-keys 'paws; source ~/.patternrc; sbt' C-m
 tmux split-window -h
