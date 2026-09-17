@@ -30,9 +30,11 @@ if [[ -n "$worktree" ]]; then
     cd "$git_dir/backend"
     git worktree add -b "df/$dir" "../worktree/$dir" develop
   fi
+  cd "$git_dir/worktree/$dir"
+else
+  cd "$git_dir/$dir"
 fi
 
-cd "$git_dir/worktree/$dir"
 tmux new-session -d
 tmux send-keys 'paws; source ~/.patternrc; sbt' C-m
 tmux split-window -h

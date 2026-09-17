@@ -60,10 +60,10 @@
       "Read(~/.pgpass)"
     ]
   },
+  "model": "fable[1m]",
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
-  "preferredNotifChannel": "notifications_disabled",
-  "model": "claude-fable-5[1m]"
+  "preferredNotifChannel": "notifications_disabled"
 }
