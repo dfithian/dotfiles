@@ -1,0 +1,53 @@
+#!/bin/bash
+
+usage() {
+    echo -e "Usage: $0 [--ssh where] [--file file_or_dir]"
+}
+
+script_dir=/Users/dan/scripts
+file=.
+ssh_cmd=
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -f|--file)
+            file=$2
+            shift 2
+            ;;
+        --ssh)
+            ssh_cmd=$2
+            shift 2
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+tmux new-session -d
+
+if [[ -n "$ssh_cmd" ]]; then
+  # Tunnel runs as a background job of this pane's shell; the trap kills it
+  # when the shell exits, and tmux SIGHUPs it if the session is killed
+  tmux send-keys "ssh -N $ssh_cmd & trap 'kill %1 2>/dev/null' EXIT" C-m
+  # Wait for the forwarded port to accept connections before starting psql
+  port=$(ssh -G "$ssh_cmd" | awk '/^localforward/ {print $2; exit}')
+  if [[ -n "$port" ]]; then
+    for _ in $(seq 1 20); do
+      nc -z localhost "$port" 2>/dev/null && break
+      sleep 0.5
+    done
+  fi
+  tmux send-keys "pgenv; psql" C-m
+else
+  tmux send-keys psql C-m
+fi
+
+tmux split-window -h
+tmux send-keys "cd $script_dir; vi $file" C-m
+tmux select-pane -L
+tmux attach-session -d

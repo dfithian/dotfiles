@@ -7,7 +7,7 @@ for file in gitconfig vimrc zprofile zshrc psqlrc pgenv tmux.conf; do
     ln -s "$(pwd)/$file" ~/.$file
 done
 
-for file in tmux-dev; do
+for file in tmux-dev tmux-db; do
     rm -f ~/.local/bin/$file
     ln -s "$(pwd)/$file" ~/.local/bin/$file
 done
