@@ -48,6 +48,6 @@ else
 fi
 
 tmux split-window -h
-tmux send-keys "cd $script_dir; vi $file" C-m
+tmux send-keys "vim -N -u /Users/dan/.vimrc $script_dir/$file"
 tmux select-pane -L
 tmux attach-session -d

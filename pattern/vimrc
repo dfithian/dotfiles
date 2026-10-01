@@ -1,3 +1,6 @@
 set number
 set relativenumber
+" netrw ignores the global number settings; force them in its listings
+let g:netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
 set directory=$HOME/.vim/swapfiles
+set autochdir

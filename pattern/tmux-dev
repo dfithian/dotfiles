@@ -35,6 +35,7 @@ else
   cd "$git_dir/$dir"
 fi
 
+paws
 tmux new-session -d
 tmux send-keys 'paws; source ~/.patternrc; sbt' C-m
 tmux split-window -h

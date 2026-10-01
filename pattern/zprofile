@@ -10,6 +10,7 @@ export PATH="$PATH:/Users/dan/Library/Application Support/JetBrains/Toolbox/scri
 export PATH="$PATH:/Users/dan/Library/Application Support/Coursier/bin"
 # <<< coursier install directory <<<
 
+
 # >>> JVM installed by coursier >>>
-export JAVA_HOME="/Users/dan/Library/Caches/Coursier/arc/https/github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_macos-aarch64_bin.tar.gz/graalvm-community-openjdk-21.0.2+13.1/Contents/Home"
+export JAVA_HOME="/Users/dan/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.4.1%252B1/OpenJDK25U-jdk_aarch64_mac_hotspot_25.0.4.1_1.tar.gz/jdk-25.0.4.1+1/Contents/Home"
 # <<< JVM installed by coursier <<<
