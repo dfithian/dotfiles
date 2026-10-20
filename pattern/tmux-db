@@ -1,21 +1,21 @@
 #!/bin/bash
 
 usage() {
-    echo -e "Usage: $0 [--ssh where] [--file file_or_dir]"
+    echo -e "Usage: $0 [--ssh where] [--vpn]"
 }
 
 script_dir=/Users/dan/scripts
-file=.
 ssh_cmd=
+vpn=
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -f|--file)
-            file=$2
-            shift 2
-            ;;
         --ssh)
             ssh_cmd=$2
             shift 2
+            ;;
+        --vpn)
+            vpn=true
+            shift
             ;;
         -h|--help)
             usage
@@ -27,6 +27,12 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+if [[ -n "$ssh_cmd" ]] && [[ -n "$vpn" ]]; then
+  echo "Can't SSH and use VPN at the same time"
+  usage
+  exit 1
+fi
 
 tmux new-session -d
 
@@ -43,11 +49,13 @@ if [[ -n "$ssh_cmd" ]]; then
     done
   fi
   tmux send-keys "pgenv; psql" C-m
+elif [[ -n "$vpn" ]]; then
+  tmux send-keys "pgenv --vpn; psql" C-m
 else
   tmux send-keys psql C-m
 fi
 
 tmux split-window -h
-tmux send-keys "vim -N -u /Users/dan/.vimrc $script_dir/$file"
+tmux send-keys "vim -N -u /Users/dan/.vimrc $script_dir/"
 tmux select-pane -L
 tmux attach-session -d
