@@ -14,3 +14,6 @@ done
 
 rm -f ~/.claude/settings.json
 ln -s "$(pwd)/claude/settings.json" ~/.claude/settings.json
+
+rm -rf ~/Library/Preferences/glow
+ln -s "$(pwd)/glow" ~/Library/Preferences/glow
