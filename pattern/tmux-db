@@ -1,12 +1,13 @@
 #!/bin/bash
 
 usage() {
-    echo -e "Usage: $0 [--ssh where] [--vpn]"
+    echo -e "Usage: $0 [--ssh where] [--vpn] [--backfill] [--dir dir]"
 }
 
-script_dir=/Users/dan/scripts
+dir=
 ssh_cmd=
 vpn=
+backfill=
 while [[ $# -gt 0 ]]; do
     case $1 in
         --ssh)
@@ -16,6 +17,14 @@ while [[ $# -gt 0 ]]; do
         --vpn)
             vpn=true
             shift
+            ;;
+        --backfill)
+            backfill=true
+            shift
+            ;;
+        --dir)
+            dir=$2
+            shift 2
             ;;
         -h|--help)
             usage
@@ -28,34 +37,49 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+script_dir="${dir:-/Users/dan/scripts}"
+backend_dir="${dir:-/Users/dan/git/backend}"
+
 if [[ -n "$ssh_cmd" ]] && [[ -n "$vpn" ]]; then
-  echo "Can't SSH and use VPN at the same time"
-  usage
-  exit 1
+    echo "Can't SSH and use VPN at the same time"
+    usage
+    exit 1
 fi
 
 tmux new-session -d
 
+db_cmds=()
+
 if [[ -n "$ssh_cmd" ]]; then
-  # Tunnel runs as a background job of this pane's shell; the trap kills it
-  # when the shell exits, and tmux SIGHUPs it if the session is killed
-  tmux send-keys "ssh -N $ssh_cmd & trap 'kill %1 2>/dev/null' EXIT" C-m
-  # Wait for the forwarded port to accept connections before starting psql
-  port=$(ssh -G "$ssh_cmd" | awk '/^localforward/ {print $2; exit}')
-  if [[ -n "$port" ]]; then
-    for _ in $(seq 1 20); do
-      nc -z localhost "$port" 2>/dev/null && break
-      sleep 0.5
-    done
-  fi
-  tmux send-keys "pgenv; psql" C-m
+    # Tunnel runs as a background job of this pane's shell; the trap kills it
+    # when the shell exits, and tmux SIGHUPs it if the session is killed
+    tmux send-keys "ssh -N $ssh_cmd & trap 'kill %1 2>/dev/null' EXIT" C-m
+    # Wait for the forwarded port to accept connections before starting psql
+    port=$(ssh -G "$ssh_cmd" | awk '/^localforward/ {print $2; exit}')
+    if [[ -n "$port" ]]; then
+        for _ in $(seq 1 20); do
+            nc -z localhost "$port" 2>/dev/null && break
+            sleep 0.5
+        done
+    fi
+    db_cmds+=(pgenv)
 elif [[ -n "$vpn" ]]; then
-  tmux send-keys "pgenv --vpn; psql" C-m
-else
-  tmux send-keys psql C-m
+    db_cmds+=("pgenv --vpn")
 fi
 
-tmux split-window -h
-tmux send-keys "vim -N -u /Users/dan/.vimrc $script_dir/"
-tmux select-pane -L
+if [[ -n "$backfill" ]]; then
+    IFS=';'
+    db_cmds+=("cd $backend_dir")
+    db_cmd="${db_cmds[*]}"
+    tmux send-keys "$db_cmd" C-m
+else
+    IFS=';'
+    db_cmds+=(psql)
+    db_cmd="${db_cmds[*]}"
+    tmux send-keys "$db_cmd" C-m
+    tmux split-window -h
+    tmux send-keys "vim $script_dir/"
+    tmux select-pane -L
+fi
+
 tmux attach-session -d
