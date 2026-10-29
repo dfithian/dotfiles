@@ -72,6 +72,7 @@ if [[ -n "$backfill" ]]; then
     db_cmds+=("cd $backend_dir")
     db_cmd="${db_cmds[*]}"
     tmux send-keys "$db_cmd" C-m
+    tmux send-keys "./shell_scripts/run_backfill.sh V001__FIXME"
 else
     IFS=';'
     db_cmds+=(psql)
